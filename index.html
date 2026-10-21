@@ -87,10 +87,10 @@
             transform: translateX(-50%);
             width: 90%;
             max-width: 450px;
-            background: rgba(255, 255, 255, 0.6);
+            background: linear-gradient(135deg, rgba(20, 20, 20, 0.75), rgba(80, 80, 80, 0.65), rgba(220, 220, 220, 0.55));
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 50px;
             padding: 12px 24px;
             z-index: 1000;
@@ -100,6 +100,7 @@
             opacity: 1;
             pointer-events: auto;
             transition: transform 0.6s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
         }
 
         .hamburger {
@@ -115,21 +116,22 @@
             display: block;
             width: 24px;
             height: 2px;
-            background-color: #000000;
+            background-color: #ffffff;
             border-radius: 2px;
             transition: 0.3s;
         }
 
         /* Semantic H1 */
         h1.menu-text {
-            color: #000000;
+            color: #ffffff;
             font-size: 14px;
             font-weight: 600;
-            opacity: 0.9;
+            opacity: 0.95;
             letter-spacing: 1px;
             margin: 0;
             padding: 0;
             line-height: normal;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
         }
 
         #bottom-app-bar {
