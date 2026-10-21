@@ -103,11 +103,9 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
         }
 
-        /* Class to hide the header when booking is clicked */
+        /* Class to completely hide the header when booking is clicked */
         #glass-nav.hidden {
-            transform: translate(-50%, -100px);
-            opacity: 0;
-            pointer-events: none;
+            display: none !important;
         }
 
         .hamburger {
@@ -128,13 +126,13 @@
             transition: 0.3s;
         }
 
-        /* Semantic H1 */
+        /* Semantic H1 - Font size reduced here */
         h1.menu-text {
             color: #ffffff;
-            font-size: 14px;
+            font-size: 11px;
             font-weight: 600;
             opacity: 0.95;
-            letter-spacing: 1px;
+            letter-spacing: 0.8px;
             margin: 0;
             padding: 0;
             line-height: normal;
@@ -733,16 +731,15 @@
         </div>
     </div>
 
-    <!-- Simplified aria-labels and titles -->
+    <!-- Bottom app bar with working Etusivu and Ajanvaraus links -->
     <nav id="bottom-app-bar">
-        <a href="#" title="Etusivu" aria-label="Etusivu">
+        <a href="https://www.inkyvibestattoo.com/" id="home-link" title="Etusivu" aria-label="Etusivu">
             <svg class="app-icon" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                 <polyline points="9 22 9 12 15 12 15 22"></polyline>
             </svg>
         </a>
 
-        <!-- Varaa aika / Calendar link with an ID for hiding the header -->
         <a href="https://johnsimsek.github.io/Ajanvaraus/" id="booking-link" title="Ajanvaraus" aria-label="Varaa aika tatuointiin">
             <svg class="app-icon" viewBox="0 0 24 24" aria-hidden="true">
                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
@@ -760,10 +757,10 @@
         </a>
     </nav>
 
-    <!-- Cleaned sidebar links -->
+    <!-- Sidebar with working Etusivu link -->
     <div id="sidebar">
         <a class="close-btn" id="close-btn" aria-label="Sulje valikko">&times;</a>
-        <a href="#">Etusivu</a>
+        <a href="https://www.inkyvibestattoo.com/">Etusivu</a>
         <a href="https://johnsimsek.github.io/Ajanvaraus/">Ajanvaraus</a>
         <a href="https://lahjakortti.inkyvibestattoo.com/">Tatuointi Lahjakortti</a>
         <a href="https://johnsimsek.github.io/Create-your-own-tattoo/">Suunnittele Oma Tatuointisi</a>
@@ -841,6 +838,11 @@
         // --- HIDE HEADER ON "VARAA AIKA" CLICK ---
         document.getElementById("booking-link").addEventListener("click", () => {
             glassNav.classList.add("hidden");
+        });
+
+        // --- SHOW HEADER ON "ETUSIVU" CLICK ---
+        document.getElementById("home-link").addEventListener("click", () => {
+            glassNav.classList.remove("hidden");
         });
 
         // --- GÜVENLİ BLUR KALDIRMA (DOKUNUNCA HIZLICA YOK OLUR) ---
