@@ -322,10 +322,10 @@
 
         .coverup-iframe {
             width: 100%;
-            height: 100vh;
+            height: 100vh; /* Yazıların tam görünmesi için artırıldı */
             border: none;
             display: block;
-            margin-top: 0;
+            margin-top: 20px; /* Üst yazı ile arasında rahat bir nefes payı bırakıldı */
         }
 
         .bottom-gallery-iframe {
@@ -412,11 +412,14 @@
             }
 
             .ig-iframe { height: 65vh; }
-            .coverup-iframe { height: 120vh; }
+            .coverup-iframe { 
+                height: 120vh; /* Mobilde yazıların ve üst kısmın tam görünmesi için optimize edildi */
+                margin-top: 15px; 
+            }
 
             .bottom-gallery-iframe {
                 height: 75vh;
-                margin-top: 40px;
+                margin-top: 20px;
             }
 
             .youtube-container {
