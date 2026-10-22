@@ -82,17 +82,16 @@
 
         #glass-nav {
             position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 450px;
+            top: 0; /* Moved flush to the top */
+            left: 0;
+            width: 100%; /* Stretches edge-to-edge */
+            max-width: 100%; /* Removes the width limit */
             background: linear-gradient(135deg, rgba(20, 20, 20, 0.75), rgba(80, 80, 80, 0.65), rgba(220, 220, 220, 0.55));
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50px;
-            padding: 12px 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Only border on bottom now */
+            border-radius: 0; /* Fully square edges to blend into screen sides */
+            padding: 16px 24px; /* Slightly adjusted padding for the top bar */
             z-index: 1000;
             display: flex;
             align-items: center;
@@ -322,10 +321,10 @@
 
         .coverup-iframe {
             width: 100%;
-            height: 100vh; /* Yazıların tam görünmesi için artırıldı */
+            height: 100vh;
             border: none;
             display: block;
-            margin-top: 20px; /* Üst yazı ile arasında rahat bir nefes payı bırakıldı */
+            margin-top: 20px;
         }
 
         .bottom-gallery-iframe {
@@ -413,7 +412,7 @@
 
             .ig-iframe { height: 65vh; }
             .coverup-iframe { 
-                height: 120vh; /* Mobilde yazıların ve üst kısmın tam görünmesi için optimize edildi */
+                height: 120vh; 
                 margin-top: 15px; 
             }
 
