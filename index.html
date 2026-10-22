@@ -743,7 +743,8 @@
             </svg>
         </a>
 
-        <a href="https://johnsimsek.github.io/Ajanvaraus/" id="booking-link" title="Ajanvaraus" aria-label="Varaa aika tatuointiin">
+        <!-- UPDATED LINK: Now uses onclick to trigger the JS function -->
+        <a href="#" onclick="goToBooking(event)" id="booking-link" title="Ajanvaraus" aria-label="Varaa aika tatuointiin">
             <svg class="app-icon" viewBox="0 0 24 24" aria-hidden="true">
                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                 <line x1="16" y1="2" x2="16" y2="6"></line>
@@ -764,7 +765,8 @@
     <div id="sidebar">
         <a class="close-btn" id="close-btn" aria-label="Sulje valikko">&times;</a>
         <a href="https://www.inkyvibestattoo.com/">Etusivu</a>
-        <a href="https://johnsimsek.github.io/Ajanvaraus/">Ajanvaraus</a>
+        <!-- UPDATED LINK: Now uses onclick to trigger the JS function -->
+        <a href="#" onclick="goToBooking(event)">Ajanvaraus</a>
         <a href="https://lahjakortti.inkyvibestattoo.com/">Tatuointi Lahjakortti</a>
         <a href="https://johnsimsek.github.io/Create-your-own-tattoo/">Suunnittele Oma Tatuointisi</a>
         <a href="https://johnsimsek.github.io/Hintaarvio/">Tatuoinnin Hinta - arvio</a>
@@ -837,6 +839,21 @@
         let scrollTimeout;
         const bottomAppBar = document.getElementById("bottom-app-bar");
         const glassNav = document.getElementById("glass-nav");
+
+        // --- NEW FUNCTION: Securely passes the login data to the Ajanvaraus subdomain ---
+        function goToBooking(e) {
+            e.preventDefault();
+            // This points to your new custom GitHub pages domain
+            let targetUrl = "https://ajanvaraus.inkyvibestattoo.com/"; 
+            
+            if (currentUser) {
+                // If they are logged in, turn their data into a secure string for the URL
+                const encodedUser = encodeURIComponent(JSON.stringify(currentUser));
+                targetUrl += "?session=" + encodedUser;
+            }
+            
+            window.location.href = targetUrl;
+        }
 
         // --- HIDE HEADER ON "VARAA AIKA" CLICK ---
         document.getElementById("booking-link").addEventListener("click", () => {
