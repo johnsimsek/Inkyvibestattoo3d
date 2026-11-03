@@ -318,7 +318,6 @@
             display: block;
         }
 
-        /* YÜKSEKLİK MASAÜSTÜ İÇİN AYARLANDI */
         .coverup-iframe {
             width: 100%;
             height: 90vh; 
@@ -412,7 +411,6 @@
 
             .ig-iframe { height: 65vh; }
             
-            /* KESİLMEYİ ENGELLEMEK İÇİN YÜKSEKLİK İDEAL SEVİYEYE ÇIKARILDI (110vh) */
             .coverup-iframe { 
                 height: 110vh; 
                 margin-top: 15px; 
@@ -841,9 +839,9 @@
         const bottomAppBar = document.getElementById("bottom-app-bar");
         const glassNav = document.getElementById("glass-nav");
 
-        // --- NEW FUNCTION: Securely passes the login data to the Ajanvaraus subdomain ---
+        // --- UPDATED FUNCTION: Allows calls without an event (e) ---
         function goToBooking(e) {
-            e.preventDefault();
+            if (e) e.preventDefault();
             // This points to your new custom GitHub pages domain
             let targetUrl = "https://ajanvaraus.inkyvibestattoo.com/"; 
             
@@ -866,7 +864,6 @@
             glassNav.classList.remove("hidden");
         });
 
-        // --- GÜVENLİ BLUR KALDIRMA (DOKUNUNCA HIZLICA YOK OLUR) ---
         function removeIntroBlur() {
             if (!document.body.classList.contains('is-scrolled')) {
                 document.body.classList.add('is-scrolled');
@@ -1186,6 +1183,13 @@
             btn.innerText = originalText;
             btn.disabled = false;
         }
+
+        // --- NEW BRIDGE: Listen for the "Varaa aika nyt" click inside the 3D Animation iframe ---
+        window.addEventListener("message", function(event) {
+            if (event.data === "goToBooking") {
+                goToBooking(); // This grabs the session data and handles the navigation
+            }
+        });
     </script>
 </body>
 </html>
