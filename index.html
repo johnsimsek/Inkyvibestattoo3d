@@ -658,97 +658,99 @@
         .status-Done { background: #e0e7ff; color: #4f46e5; }
         .status-Cancelled { background: #fee2e2; color: #dc2626; }
 
-        /* ================================== */
-        /* GALLERY CSS (Senin verdiğin hali)  */
-        /* ================================== */
-        :root{ --h: 420px; }
-        @media (max-width:520px){ :root{ --h: 360px; } }
+        /* ========================================= */
+        /* UUDEN GALLERIAN CSS (Mukautettu sivustolle) */
+        /* ========================================= */
+        :root{ --compact-h: 420px; }
+        @media (max-width:520px){ :root{ --compact-h: 360px; } }
 
-        .wrap{max-width:1100px;margin:0 auto;padding:12px}
-        .shell{border:1px solid rgba(255,255,255,.10);border-radius:16px;overflow:hidden;background:#000}
+        .compact-wrap { max-width:1100px; margin:0 auto; padding:12px; font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif; }
+        .compact-shell { border:1px solid rgba(255,255,255,.10); border-radius:16px; overflow:hidden; background:#000; color:#eaeaea; }
 
-        .top{
-          height:44px;display:flex;align-items:center;justify-content:space-between;
-          padding:0 12px;border-bottom:1px solid rgba(255,255,255,.06);
+        .compact-top {
+          height:44px; display:flex; align-items:center; justify-content:space-between;
+          padding:0 12px; border-bottom:1px solid rgba(255,255,255,.06);
         }
-        .title{font-size:12px;letter-spacing:.18em;color:#cfcfcf;text-transform:uppercase}
-        .count{font-size:12px;letter-spacing:.18em;color:#9a9a9a}
+        .compact-title { font-size:12px; letter-spacing:.18em; color:#cfcfcf; text-transform:uppercase; }
+        .compact-count { font-size:12px; letter-spacing:.18em; color:#9a9a9a; }
 
-        .stage{
-          position:relative;height:var(--h);
-          display:flex;align-items:center;justify-content:center;
+        .compact-stage {
+          position:relative; height:var(--compact-h);
+          display:flex; align-items:center; justify-content:center;
           overflow:hidden;
         }
-        .stage::before{
-          content:"";position:absolute; inset:0;
+        .compact-stage::before {
+          content:""; position:absolute; inset:0;
           background-image: var(--bg);
-          background-size:cover;background-position:center;
-          filter: blur(18px);transform: scale(1.1);opacity:.28;
+          background-size:cover; background-position:center;
+          filter: blur(18px); transform: scale(1.1); opacity:.28;
         }
-        .stage::after{
-          content:"";position:absolute; inset:0;
+        .compact-stage::after {
+          content:""; position:absolute; inset:0;
           background: radial-gradient(transparent 0%, rgba(0,0,0,.35) 60%, rgba(0,0,0,.70) 100%);
         }
-        .main{
+        .compact-main {
           position:relative; z-index:2;
           width:100%; height:100%;
           object-fit:contain;
           opacity:0; transition:opacity .35s ease;
         }
-        .main.show{opacity:1}
+        .compact-main.show { opacity:1; }
 
-        .nav{
+        .compact-nav {
           position:absolute; z-index:3;
           top:50%; transform:translateY(-50%);
-          width:44px; height:44px;border-radius:14px;
+          width:44px; height:44px; border-radius:14px;
           border:1px solid rgba(255,255,255,.18);
           background:rgba(255,255,255,.08);
-          color:#fff;font-size:24px;cursor:pointer;
+          color:#fff; font-size:24px; cursor:pointer;
+          display:flex; align-items:center; justify-content:center;
+          padding-bottom: 3px;
         }
-        .nav.left{left:10px}
-        .nav.right{right:10px}
-        @media (max-width:520px){ .nav{display:none} }
+        .compact-nav.left { left:10px; }
+        .compact-nav.right { right:10px; }
+        @media (max-width:520px){ .compact-nav{display:none} }
 
-        .thumbs{
-          display:flex;gap:8px;padding:10px;overflow-x:auto;
-          border-top:1px solid rgba(255,255,255,.06);background:#0b0b0b;
+        .compact-thumbs {
+          display:flex; gap:8px; padding:10px; overflow-x:auto;
+          border-top:1px solid rgba(255,255,255,.06); background:#0b0b0b;
         }
-        .thumb{
-          width:56px;height:42px;flex:0 0 auto;border-radius:10px;overflow:hidden;
+        .compact-thumb {
+          width:56px; height:42px; flex:0 0 auto; border-radius:10px; overflow:hidden;
           border:1px solid rgba(255,255,255,.12);
-          opacity:.55;cursor:pointer;
+          opacity:.55; cursor:pointer;
         }
-        .thumb.active{opacity:1;border-color:#9a9a9a}
-        .thumb img{width:100%;height:100%;object-fit:cover}
+        .compact-thumb.active { opacity:1; border-color:#9a9a9a; }
+        .compact-thumb img { width:100%; height:100%; object-fit:cover; }
 
-        .lb{
+        .compact-lb {
           position:fixed; inset:0;
           background:rgba(0,0,0,.94);
           display:none; align-items:center; justify-content:center;
-          z-index:9999;
+          z-index:99999; /* En üstte durması için 99999 yapıldı */
           padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
         }
-        .lb.show{display:flex}
+        .compact-lb.show { display:flex; }
 
-        .lbStage{
+        .compact-lbStage {
           position:relative;
           width:100vw; height:100vh;
           display:flex; align-items:center; justify-content:center;
           overflow:hidden;
         }
-        .lbStage::before{
+        .compact-lbStage::before {
           content:""; position:absolute; inset:0;
           background-image: var(--lbbg);
-          background-size:cover;background-position:center;
+          background-size:cover; background-position:center;
           filter: blur(22px); transform: scale(1.12);
           opacity:.22;
         }
-        .lbStage::after{
+        .compact-lbStage::after {
           content:""; position:absolute; inset:0;
           background: radial-gradient(transparent 0%, rgba(0,0,0,.35) 55%, rgba(0,0,0,.80) 100%);
         }
 
-        .lbImg{
+        .compact-lbImg {
           position:relative; z-index:2;
           width:100vw; height:100vh;
           object-fit:contain;
@@ -756,39 +758,41 @@
           -webkit-touch-callout:none;
         }
 
-        .lbBtn{
+        .compact-lbBtn {
           position:absolute; z-index:3;
-          width:44px;height:44px;border-radius:14px;
+          width:44px; height:44px; border-radius:14px;
           border:1px solid rgba(255,255,255,.20);
           background:rgba(255,255,255,.08);
-          color:#fff;font-size:24px;cursor:pointer;
-          display:grid;place-items:center;
+          color:#fff; font-size:24px; cursor:pointer;
+          display:grid; place-items:center;
+          font-family: sans-serif;
         }
-        .lbClose{
+        .compact-lbClose {
           top:calc(14px + env(safe-area-inset-top));
           right:calc(14px + env(safe-area-inset-right));
         }
-        .lbPlay{
+        .compact-lbPlay {
           top:calc(14px + env(safe-area-inset-top));
           left:calc(14px + env(safe-area-inset-left));
           font-size:18px;
         }
-        .lbNav{ top:50%; transform:translateY(-50%); }
-        .lbPrev{ left:calc(14px + env(safe-area-inset-left)); }
-        .lbNext{ right:calc(14px + env(safe-area-inset-right)); }
+        .compact-lbNav { top:50%; transform:translateY(-50%); padding-bottom: 3px; }
+        .compact-lbPrev { left:calc(14px + env(safe-area-inset-left)); }
+        .compact-lbNext { right:calc(14px + env(safe-area-inset-right)); }
 
-        .lbCount{
+        .compact-lbCount {
           position:absolute; z-index:3;
           bottom:calc(16px + env(safe-area-inset-bottom));
           left:50%; transform:translateX(-50%);
           font-size:12px; letter-spacing:.18em;
-          color:#d6d6d6;
-          padding:8px 12px;border-radius:999px;
+          color:#d6d6d6; font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;
+          padding:8px 12px; border-radius:999px;
           border:1px solid rgba(255,255,255,.16);
           background:rgba(0,0,0,.35);
           backdrop-filter: blur(10px);
         }
-        @media (prefers-reduced-motion: reduce){ .main{transition:none} }
+        @media (prefers-reduced-motion: reduce){ .compact-main{transition:none} }
+        /* ========================================= */
     </style>
 </head>
 
@@ -865,6 +869,7 @@
             </svg>
         </a>
 
+        <!-- UPDATED LINK: Now uses onclick to trigger the JS function -->
         <a href="#" onclick="goToBooking(event)" id="booking-link" title="Ajanvaraus" aria-label="Varaa aika tatuointiin">
             <svg class="app-icon" viewBox="0 0 24 24" aria-hidden="true">
                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
@@ -886,6 +891,7 @@
     <div id="sidebar">
         <a class="close-btn" id="close-btn" aria-label="Sulje valikko">&times;</a>
         <a href="https://www.inkyvibestattoo.com/">Etusivu</a>
+        <!-- UPDATED LINK: Now uses onclick to trigger the JS function -->
         <a href="#" onclick="goToBooking(event)">Ajanvaraus</a>
         <a href="https://lahjakortti.inkyvibestattoo.com/">Tatuointi Lahjakortti</a>
         <a href="https://johnsimsek.github.io/Create-your-own-tattoo/">Suunnittele Oma Tatuointisi</a>
@@ -918,37 +924,26 @@
                 <img src="https://johnsimsek.github.io/Inkyvibes-tattoo-lettering/IMG_2383.JPEG" alt="Inky Vibes Tattoo logo">
             </div>
 
-            <!-- ================================== -->
-            <!-- GALLERY HTML (Senin verdiğin hali) -->
-            <!-- ================================== -->
-            <div class="wrap">
-              <div class="shell">
-                <div class="top">
-                  <div class="title">INKY VIBES TATTOO</div>
-                  <div class="count" id="count">—</div>
+            <!-- ========================================= -->
+            <!-- UUSI GALLERIA KUTUSU (Lightbox Dışarı Alındı) -->
+            <!-- ========================================= -->
+            <div class="compact-wrap">
+              <div class="compact-shell">
+                <div class="compact-top">
+                  <div class="compact-title">INKY VIBES TATTOO</div>
+                  <div class="compact-count" id="compact-count">—</div>
                 </div>
 
-                <div class="stage" id="stage">
-                  <button class="nav left" id="prev" aria-label="Önceki">‹</button>
-                  <img class="main" id="main" src="" alt="" loading="eager" decoding="async">
-                  <button class="nav right" id="next" aria-label="Sonraki">›</button>
+                <div class="compact-stage" id="compact-stage">
+                  <button class="compact-nav left" id="compact-prev" aria-label="Önceki">‹</button>
+                  <img class="compact-main" id="compact-main" src="" alt="" loading="eager" decoding="async">
+                  <button class="compact-nav right" id="compact-next" aria-label="Sonraki">›</button>
                 </div>
 
-                <div class="thumbs" id="thumbs"></div>
+                <div class="compact-thumbs" id="compact-thumbs"></div>
               </div>
             </div>
-
-            <div class="lb" id="lb" aria-hidden="true">
-              <div class="lbStage" id="lbStage">
-                <img class="lbImg" id="lbImg" src="" alt="" draggable="false">
-                <button class="lbBtn lbClose" id="lbClose" aria-label="Kapat">✕</button>
-                <button class="lbBtn lbPlay" id="lbPlay" aria-label="Slayt">⏸</button>
-                <button class="lbBtn lbNav lbPrev" id="lbPrev" aria-label="Önceki">‹</button>
-                <button class="lbBtn lbNav lbNext" id="lbNext" aria-label="Sonraki">›</button>
-                <div class="lbCount" id="lbCount">—</div>
-              </div>
-            </div>
-            <!-- ================================== -->
+            <!-- ========================================= -->
 
             <h2 class="ig-caption">Instagram Stories</h2>
 
@@ -971,6 +966,22 @@
         </section>
     </main>
 
+    <!-- ========================================= -->
+    <!-- LIGHTBOX BURAYA TAŞINDI (Sayfanın En Altına) -->
+    <!-- Bu sayede blur filtresine takılmayacak.   -->
+    <!-- ========================================= -->
+    <div class="compact-lb" id="compact-lb" aria-hidden="true">
+      <div class="compact-lbStage" id="compact-lbStage">
+        <img class="compact-lbImg" id="compact-lbImg" src="" alt="" draggable="false">
+        <button class="compact-lbBtn compact-lbClose" id="compact-lbClose" aria-label="Kapat">✕</button>
+        <button class="compact-lbBtn compact-lbPlay" id="compact-lbPlay" aria-label="Slayt">⏸</button>
+        <button class="compact-lbBtn compact-lbNav compact-lbPrev" id="compact-lbPrev" aria-label="Önceki">‹</button>
+        <button class="compact-lbBtn compact-lbNav compact-lbNext" id="compact-lbNext" aria-label="Sonraki">›</button>
+        <div class="compact-lbCount" id="compact-lbCount">—</div>
+      </div>
+    </div>
+    <!-- ========================================= -->
+
     <script>
         document.body.classList.add('js-enabled');
 
@@ -990,11 +1001,14 @@
         const bottomAppBar = document.getElementById("bottom-app-bar");
         const glassNav = document.getElementById("glass-nav");
 
+        // --- UPDATED FUNCTION: Allows calls without an event (e) ---
         function goToBooking(e) {
             if (e) e.preventDefault();
+            // This points to your new custom GitHub pages domain
             let targetUrl = "https://ajanvaraus.inkyvibestattoo.com/"; 
             
             if (currentUser) {
+                // If they are logged in, turn their data into a secure string for the URL
                 const encodedUser = encodeURIComponent(JSON.stringify(currentUser));
                 targetUrl += "?session=" + encodedUser;
             }
@@ -1002,10 +1016,12 @@
             window.location.href = targetUrl;
         }
 
+        // --- HIDE HEADER ON "VARAA AIKA" CLICK ---
         document.getElementById("booking-link").addEventListener("click", () => {
             glassNav.classList.add("hidden");
         });
 
+        // --- SHOW HEADER ON "ETUSIVU" CLICK ---
         document.getElementById("home-link").addEventListener("click", () => {
             glassNav.classList.remove("hidden");
         });
@@ -1330,266 +1346,256 @@
             btn.disabled = false;
         }
 
+        // --- NEW BRIDGE: Listen for the "Varaa aika nyt" click inside the 3D Animation iframe ---
         window.addEventListener("message", function(event) {
             if (event.data === "goToBooking") {
-                goToBooking(); 
+                goToBooking(); // This grabs the session data and handles the navigation
             }
         });
     </script>
     
-    <!-- ================================== -->
-    <!-- GALLERY JS (Senin verdiğin hali)   -->
-    <!-- ================================== -->
+    <!-- ========================================= -->
+    <!-- UUDEN GALLERIAN JS (Mukautettu sivustolle) -->
+    <!-- ========================================= -->
     <script>
-      /**
-       * ✅ İstediğin sistem:
-       * - Foto isimleri 01.jpg, 02.jpg, 03.jpg ... (SIRALI)
-       * - 05.jpg eklersen: sayfayı yenilemeden otomatik ekler (polling)
-       * - Silersen: özellikle sondan silince otomatik kaldırır
-       * - 200 boş alan / siyah kare yok
-       */
-      const CONFIG = {
-        ext: "jpg",
-        probeMax: 500,
-        slideMs: 2500,
+      (function() {
+        const CONFIG = {
+          ext: "jpg",
+          probeMax: 500,
+          slideMs: 2500,
+          watchIntervalMs: 4000,
+          reconcileIntervalMs: 30000,
+          imageTimeoutMs: 1800,
+        };
 
-        // ✅ otomatik güncelleme
-        watchIntervalMs: 4000,      // 4 sn'de bir "yeni foto var mı" bakar
-        reconcileIntervalMs: 30000, // 30 sn'de bir "silinmiş mi" kontrolü yapar
+        let IMAGES = [];
+        let idx = 0;
+        let slideTimer = null;
 
-        imageTimeoutMs: 1800,
-      };
+        const stage = document.getElementById('compact-stage');
+        const main  = document.getElementById('compact-main');
+        const count = document.getElementById('compact-count');
+        const thumbs= document.getElementById('compact-thumbs');
 
-      let IMAGES = [];
-      let idx = 0;
-      let slideTimer = null;
+        const lb = document.getElementById('compact-lb');
+        const lbStage = document.getElementById('compact-lbStage');
+        const lbImg = document.getElementById('compact-lbImg');
+        const lbClose = document.getElementById('compact-lbClose');
+        const lbPrev = document.getElementById('compact-lbPrev');
+        const lbNext = document.getElementById('compact-lbNext');
+        const lbPlay = document.getElementById('compact-lbPlay');
+        const lbCount = document.getElementById('compact-lbCount');
 
-      const stage = document.getElementById('stage');
-      const main  = document.getElementById('main');
-      const count = document.getElementById('count');
-      const thumbs= document.getElementById('thumbs');
+        function pad2(n){ return String(n).padStart(2, "0"); }
+        function fileFor(i){ return `${pad2(i)}.${CONFIG.ext}`; }
 
-      const lb = document.getElementById('lb');
-      const lbStage = document.getElementById('lbStage');
-      const lbImg = document.getElementById('lbImg');
-      const lbClose = document.getElementById('lbClose');
-      const lbPrev = document.getElementById('lbPrev');
-      const lbNext = document.getElementById('lbNext');
-      const lbPlay = document.getElementById('lbPlay');
-      const lbCount = document.getElementById('lbCount');
-
-      function pad2(n){ return String(n).padStart(2, "0"); }
-      function fileFor(i){ return `${pad2(i)}.${CONFIG.ext}`; }
-
-      function setBg(el, varName, src){
-        el.style.setProperty(varName, `url("${src}")`);
-      }
-
-      function stopSlideshow(){
-        if (slideTimer) clearInterval(slideTimer);
-        slideTimer = null;
-        lbPlay.textContent = "▶";
-      }
-
-      function startSlideshow(){
-        stopSlideshow();
-        lbPlay.textContent = "⏸";
-        slideTimer = setInterval(next, CONFIG.slideMs);
-      }
-
-      function toggleSlideshow(){
-        if (slideTimer) stopSlideshow();
-        else startSlideshow();
-      }
-
-      function safeIndex(i){
-        const n = IMAGES.length;
-        if (n === 0) return 0;
-        return (i % n + n) % n;
-      }
-
-      function buildThumbs(){
-        thumbs.innerHTML = "";
-        IMAGES.forEach((src,i)=>{
-          const t = document.createElement('div');
-          t.className = 'thumb';
-          t.innerHTML = `<img src="${src}" alt="" loading="lazy" decoding="async">`;
-          t.onclick = ()=>{ idx=i; render(); };
-          thumbs.appendChild(t);
-        });
-      }
-
-      function render(){
-        if (IMAGES.length === 0){
-          count.textContent = "0 / 0";
-          main.classList.remove('show');
-          main.removeAttribute("src");
-          stage.style.setProperty('--bg', 'none');
-          return;
+        function setBg(el, varName, src){
+          el.style.setProperty(varName, `url("${src}")`);
         }
 
-        idx = safeIndex(idx);
-        main.classList.remove('show');
+        function stopSlideshow(){
+          if (slideTimer) clearInterval(slideTimer);
+          slideTimer = null;
+          lbPlay.textContent = "▶";
+        }
 
-        const src = IMAGES[idx];
-        setBg(stage, '--bg', src);
-        count.textContent = `${idx+1} / ${IMAGES.length}`;
+        function startSlideshow(){
+          stopSlideshow();
+          lbPlay.textContent = "⏸";
+          slideTimer = setInterval(next, CONFIG.slideMs);
+        }
 
-        document.querySelectorAll('.thumb').forEach((t,i)=>{
-          t.classList.toggle('active', i===idx);
-        });
+        function toggleSlideshow(){
+          if (slideTimer) stopSlideshow();
+          else startSlideshow();
+        }
 
-        main.onload = ()=> main.classList.add('show');
-        main.src = src;
+        function safeIndex(i){
+          const n = IMAGES.length;
+          if (n === 0) return 0;
+          return (i % n + n) % n;
+        }
 
-        if (lb.classList.contains('show')){
+        function buildThumbs(){
+          thumbs.innerHTML = "";
+          IMAGES.forEach((src,i)=>{
+            const t = document.createElement('div');
+            t.className = 'compact-thumb';
+            t.innerHTML = `<img src="${src}" alt="" loading="lazy" decoding="async">`;
+            t.onclick = ()=>{ idx=i; render(); };
+            thumbs.appendChild(t);
+          });
+        }
+
+        function render(){
+          if (IMAGES.length === 0){
+            count.textContent = "0 / 0";
+            main.classList.remove('show');
+            main.removeAttribute("src");
+            stage.style.setProperty('--bg', 'none');
+            return;
+          }
+
+          idx = safeIndex(idx);
+          main.classList.remove('show');
+
+          const src = IMAGES[idx];
+          setBg(stage, '--bg', src);
+          count.textContent = `${idx+1} / ${IMAGES.length}`;
+
+          document.querySelectorAll('.compact-thumb').forEach((t,i)=>{
+            t.classList.toggle('active', i===idx);
+          });
+
+          main.onload = ()=> main.classList.add('show');
+          main.src = src;
+
+          if (lb.classList.contains('show')){
+            setBg(lbStage, '--lbbg', src);
+            lbImg.src = src;
+            lbCount.textContent = `${idx+1} / ${IMAGES.length}`;
+          }
+        }
+
+        function next(){ idx = safeIndex(idx+1); render(); }
+        function prev(){ idx = safeIndex(idx-1); render(); }
+
+        document.getElementById('compact-next').onclick = next;
+        document.getElementById('compact-prev').onclick = prev;
+
+        function openLightbox(){
+          if (IMAGES.length === 0) return;
+          const src = IMAGES[idx];
+
+          lb.classList.add('show');
+          lb.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = "hidden";
+
           setBg(lbStage, '--lbbg', src);
           lbImg.src = src;
           lbCount.textContent = `${idx+1} / ${IMAGES.length}`;
+
+          startSlideshow();
         }
-      }
 
-      function next(){ idx = safeIndex(idx+1); render(); }
-      function prev(){ idx = safeIndex(idx-1); render(); }
+        function closeLightbox(){
+          lb.classList.remove('show');
+          lb.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = "";
+          stopSlideshow();
+          lbImg.src = "";
+        }
 
-      document.getElementById('next').onclick = next;
-      document.getElementById('prev').onclick = prev;
+        main.onclick = openLightbox;
 
-      function openLightbox(){
-        if (IMAGES.length === 0) return;
-        const src = IMAGES[idx];
+        lbClose.onclick = closeLightbox;
+        lbPrev.onclick = ()=>{ prev(); startSlideshow(); };
+        lbNext.onclick = ()=>{ next(); startSlideshow(); };
+        lbPlay.onclick = toggleSlideshow;
 
-        lb.classList.add('show');
-        lb.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = "hidden";
+        lbImg.addEventListener('click', (e)=>{ e.stopPropagation(); }, {passive:true});
+        lb.addEventListener('click', (e)=>{ if(e.target === lb) closeLightbox(); });
 
-        setBg(lbStage, '--lbbg', src);
-        lbImg.src = src;
-        lbCount.textContent = `${idx+1} / ${IMAGES.length}`;
-
-        startSlideshow();
-      }
-
-      function closeLightbox(){
-        lb.classList.remove('show');
-        lb.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = "";
-        stopSlideshow();
-        lbImg.src = "";
-      }
-
-      main.onclick = openLightbox;
-
-      lbClose.onclick = closeLightbox;
-      lbPrev.onclick = ()=>{ prev(); startSlideshow(); };
-      lbNext.onclick = ()=>{ next(); startSlideshow(); };
-      lbPlay.onclick = toggleSlideshow;
-
-      lbImg.addEventListener('click', (e)=>{ e.stopPropagation(); }, {passive:true});
-      lb.addEventListener('click', (e)=>{ if(e.target === lb) closeLightbox(); });
-
-      document.addEventListener('keydown', (e)=>{
-        if (!lb.classList.contains('show')) return;
-        if (e.key === "Escape") closeLightbox();
-        if (e.key === "ArrowRight") { next(); startSlideshow(); }
-        if (e.key === "ArrowLeft") { prev(); startSlideshow(); }
-        if (e.key === " ") { e.preventDefault(); toggleSlideshow(); }
-      });
-
-      function addSwipe(el, onLeft, onRight){
-        let sx=0, sy=0;
-        el.addEventListener('touchstart', (e)=>{
-          const t = e.touches[0];
-          sx = t.clientX; sy = t.clientY;
-        }, {passive:true});
-
-        el.addEventListener('touchend', (e)=>{
-          const t = e.changedTouches[0];
-          const dx = t.clientX - sx;
-          const dy = t.clientY - sy;
-          if(Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)){
-            if(dx < 0) onLeft(); else onRight();
-          }
-        }, {passive:true});
-      }
-
-      addSwipe(stage, next, prev);
-      addSwipe(lbStage, ()=>{ next(); startSlideshow(); }, ()=>{ prev(); startSlideshow(); });
-
-      function isRealImage(url){
-        return new Promise((resolve)=>{
-          const img = new Image();
-          const timer = setTimeout(()=>finish(false), CONFIG.imageTimeoutMs);
-
-          function finish(ok){
-            clearTimeout(timer);
-            img.onload = null;
-            img.onerror = null;
-            resolve(ok);
-          }
-
-          img.onload = ()=>finish(true);
-          img.onerror = ()=>finish(false);
-
-          const bust = `cb=${Date.now()}_${Math.random().toString(16).slice(2)}`;
-          img.src = url.includes("?") ? `${url}&${bust}` : `${url}?${bust}`;
+        document.addEventListener('keydown', (e)=>{
+          if (!lb.classList.contains('show')) return;
+          if (e.key === "Escape") closeLightbox();
+          if (e.key === "ArrowRight") { next(); startSlideshow(); }
+          if (e.key === "ArrowLeft") { prev(); startSlideshow(); }
+          if (e.key === " ") { e.preventDefault(); toggleSlideshow(); }
         });
-      }
 
-      async function probeInitialSequential(){
-        const found = [];
-        for (let i = 1; i <= CONFIG.probeMax; i++){
-          const f = fileFor(i);
-          if (await isRealImage(f)) found.push(f);
-          else break; // ✅ ilk eksikte dur
+        function addSwipe(el, onLeft, onRight){
+          let sx=0, sy=0;
+          el.addEventListener('touchstart', (e)=>{
+            const t = e.touches[0];
+            sx = t.clientX; sy = t.clientY;
+          }, {passive:true});
+
+          el.addEventListener('touchend', (e)=>{
+            const t = e.changedTouches[0];
+            const dx = t.clientX - sx;
+            const dy = t.clientY - sy;
+            if(Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)){
+              if(dx < 0) onLeft(); else onRight();
+            }
+          }, {passive:true});
         }
-        return found;
-      }
 
-      async function watchForNewImages(){
-        // ✅ sadece "sonraki" dosyayı kontrol eder → hızlı
-        let nextIndex = IMAGES.length + 1;
-        if (nextIndex < 1) nextIndex = 1;
+        addSwipe(stage, next, prev);
+        addSwipe(lbStage, ()=>{ next(); startSlideshow(); }, ()=>{ prev(); startSlideshow(); });
 
-        for (let guard = 0; guard < 10; guard++){
-          const f = fileFor(nextIndex);
-          const ok = await isRealImage(f);
-          if (!ok) break;
+        function isRealImage(url){
+          return new Promise((resolve)=>{
+            const img = new Image();
+            const timer = setTimeout(()=>finish(false), CONFIG.imageTimeoutMs);
 
-          IMAGES.push(f);
-          nextIndex++;
+            function finish(ok){
+              clearTimeout(timer);
+              img.onload = null;
+              img.onerror = null;
+              resolve(ok);
+            }
 
+            img.onload = ()=>finish(true);
+            img.onerror = ()=>finish(false);
+
+            const bust = `cb=${Date.now()}_${Math.random().toString(16).slice(2)}`;
+            img.src = url.includes("?") ? `${url}&${bust}` : `${url}?${bust}`;
+          });
+        }
+
+        async function probeInitialSequential(){
+          const found = [];
+          for (let i = 1; i <= CONFIG.probeMax; i++){
+            const f = fileFor(i);
+            if (await isRealImage(f)) found.push(f);
+            else break;
+          }
+          return found;
+        }
+
+        async function watchForNewImages(){
+          let nextIndex = IMAGES.length + 1;
+          if (nextIndex < 1) nextIndex = 1;
+
+          for (let guard = 0; guard < 10; guard++){
+            const f = fileFor(nextIndex);
+            const ok = await isRealImage(f);
+            if (!ok) break;
+
+            IMAGES.push(f);
+            nextIndex++;
+
+            buildThumbs();
+            render();
+          }
+        }
+
+        async function reconcileDeletionsFromEnd(){
+          while (IMAGES.length > 0){
+            const last = IMAGES[IMAGES.length - 1];
+            const ok = await isRealImage(last);
+            if (ok) break;
+
+            IMAGES.pop();
+            idx = Math.min(idx, Math.max(0, IMAGES.length - 1));
+            buildThumbs();
+            render();
+          }
+        }
+
+        async function init(){
+          IMAGES = await probeInitialSequential();
           buildThumbs();
+          idx = 0;
           render();
+
+          setInterval(watchForNewImages, CONFIG.watchIntervalMs);
+          setInterval(reconcileDeletionsFromEnd, CONFIG.reconcileIntervalMs);
         }
-      }
 
-      async function reconcileDeletionsFromEnd(){
-        // ✅ sadece sondan kontrol eder (01..04 varken 04 silinirse düşer)
-        while (IMAGES.length > 0){
-          const last = IMAGES[IMAGES.length - 1];
-          const ok = await isRealImage(last);
-          if (ok) break;
-
-          IMAGES.pop();
-          idx = Math.min(idx, Math.max(0, IMAGES.length - 1));
-          buildThumbs();
-          render();
-        }
-      }
-
-      async function init(){
-        IMAGES = await probeInitialSequential();
-        buildThumbs();
-        idx = 0;
-        render();
-
-        // ✅ otomatik update
-        setInterval(watchForNewImages, CONFIG.watchIntervalMs);
-        setInterval(reconcileDeletionsFromEnd, CONFIG.reconcileIntervalMs);
-      }
-
-      init();
+        init();
+      })();
     </script>
 </body>
 </html>
