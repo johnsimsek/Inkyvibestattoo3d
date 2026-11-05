@@ -769,13 +769,13 @@
         /* YENİ VE DAHA KÜÇÜK LİQUİD GLASS BUTON TASARIMI (SABİT KONUM) */
         .compact-lbBtn {
           position:absolute; z-index:3;
-          width:34px; height:34px; /* Boyutlar daha da küçültüldü (38px'ten 34px'e) */
+          width:34px; height:34px;
           border-radius:10px;
           border:1px solid rgba(255,255,255,.25);
-          background:rgba(20,20,20,.45); /* Liquid glass efektinin arkası */
-          backdrop-filter: blur(12px); /* Cam efekti bulanıklığı */
+          background:rgba(20,20,20,.45);
+          backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
-          color:#fff; font-size:18px; cursor:pointer; /* İkon boyutu küçültüldü */
+          color:#fff; font-size:18px; 
           display:grid; place-items:center;
           font-family: sans-serif;
           transition: background 0.3s, transform 0.2s;
@@ -784,7 +784,7 @@
           transform: scale(0.95);
         }
         
-        /* GÜVENLİ VE SABİT KONUMLANDIRMA: Tarayıcı menüsü kaysa da gizlenmez! */
+        /* GÜVENLİ VE SABİT KONUMLANDIRMA */
         .compact-lbClose {
           top: 80px; 
           right: 20px;
@@ -792,10 +792,9 @@
         .compact-lbPlay {
           top: 80px; 
           left: 20px;
-          font-size:14px; /* Play/Pause ikonu daha da ufaltıldı */
+          font-size:14px;
         }
         
-        /* Sağ-Sol oklar da uyumlu ve dengeli kalsın diye güncellendi */
         .compact-lbNav { top:50%; transform:translateY(-50%); padding-bottom: 3px; font-size: 22px; }
         .compact-lbPrev { left:calc(14px + env(safe-area-inset-left)); }
         .compact-lbNext { right:calc(14px + env(safe-area-inset-right)); }
@@ -997,6 +996,7 @@
       </div>
     </div>
 
+    <!-- KIRJAUTUMISEN SYNKRONOINTI 3D-ANIMAATIOON -->
     <script>
         document.body.classList.add('js-enabled');
 
@@ -1012,6 +1012,22 @@
             console.warn("Virhe luettaessa käyttäjätietoja:", e);
         }
         
+        // ------------------------------------------------------------------
+        // TÄMÄ FUNKTIO KERTOO 3D-ANIMAATIOLLE KIRJAUTUMISTILAN
+        function notifyAnimationIframe() {
+            const iframes = document.querySelectorAll('.animation-iframe');
+            iframes.forEach(iframe => {
+                if (iframe && iframe.contentWindow) {
+                    iframe.contentWindow.postMessage(
+                        { action: "updateLoginState", loggedIn: !!currentUser, user: currentUser },
+                        "*"
+                    );
+                }
+            });
+        }
+        window.addEventListener('load', notifyAnimationIframe);
+        // ------------------------------------------------------------------
+
         let scrollTimeout;
         const bottomAppBar = document.getElementById("bottom-app-bar");
         const glassNav = document.getElementById("glass-nav");
@@ -1161,6 +1177,7 @@
                 console.warn("Uloskirjautumisvirhe:", e);
             }
             currentUser = null;
+            notifyAnimationIframe(); // <--- PÄIVITYS: Tieto uloskirjautumisesta
             profilePopup.classList.remove("show");
             alert("Olet kirjautunut ulos.");
         }
@@ -1237,6 +1254,7 @@
                     }
                     
                     currentUser = data.user;
+                    notifyAnimationIframe(); // <--- PÄIVITYS: Tieto sisäänkirjautumisesta
 
                     alert(
                         isLogin
@@ -1359,6 +1377,10 @@
         window.addEventListener("message", function(event) {
             if (event.data === "goToBooking") {
                 goToBooking();
+            }
+            // 3D-animaatio voi pyytää tilaa heti ladatessaan
+            if (event.data === "checkLoginState") {
+                notifyAnimationIframe();
             }
         });
     </script>
