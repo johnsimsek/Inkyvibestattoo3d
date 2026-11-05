@@ -766,7 +766,7 @@
           -webkit-touch-callout:none;
         }
 
-        /* YENİ VE DAHA KÜÇÜK LİQUİD GLASS BUTON TASARIMI */
+        /* YENİ VE DAHA KÜÇÜK LİQUİD GLASS BUTON TASARIMI (SABİT KONUM) */
         .compact-lbBtn {
           position:absolute; z-index:3;
           width:34px; height:34px; /* Boyutlar daha da küçültüldü (38px'ten 34px'e) */
@@ -784,13 +784,14 @@
           transform: scale(0.95);
         }
         
+        /* GÜVENLİ VE SABİT KONUMLANDIRMA: Tarayıcı menüsü kaysa da gizlenmez! */
         .compact-lbClose {
-          top:calc(50px + env(safe-area-inset-top)); /* Belirgin şekilde daha aşağı çekildi */
-          right:calc(16px + env(safe-area-inset-right));
+          top: 80px; 
+          right: 20px;
         }
         .compact-lbPlay {
-          top:calc(50px + env(safe-area-inset-top)); /* Belirgin şekilde daha aşağı çekildi */
-          left:calc(16px + env(safe-area-inset-left));
+          top: 80px; 
+          left: 20px;
           font-size:14px; /* Play/Pause ikonu daha da ufaltıldı */
         }
         
