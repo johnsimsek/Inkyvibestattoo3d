@@ -304,11 +304,15 @@
             text-transform: uppercase;
         }
 
+        /* YENİ BOŞLUK DÜZELTMELERİ BURADA */
         .ig-iframe {
             width: 100%;
-            height: 85vh;
+            height: 85vh; /* Hikaye tam ekran açılabilsin diye uzun bırakıldı */
             border: none;
             display: block;
+            position: relative;
+            z-index: 30; /* Alttaki menünün üstünde durmasını sağlar */
+            margin-bottom: -55vh; /* Masaüstünde alttaki boşluğu yokedip Coverup iframe'ini yukarı çeker! */
         }
 
         .coverup-iframe {
@@ -316,8 +320,11 @@
             height: 90vh; 
             border: none;
             display: block;
-            margin-top: 20px;
+            margin-top: 0; /* Önceden 20px'di, boşluğu sıfırladık */
+            position: relative;
+            z-index: 10; /* Stories iframe'inin altında kalıp düzgün çalışmasını sağlar */
         }
+        /* YENİ BOŞLUK DÜZELTMELERİ SONU */
 
         .bottom-gallery-iframe {
             width: 100%;
@@ -400,12 +407,17 @@
                 margin: 20px 0 10px 0;
             }
 
-            .ig-iframe { height: 65vh; }
+            /* MOBİLDEKİ BOŞLUK DÜZELTMELERİ */
+            .ig-iframe { 
+                height: 65vh; 
+                margin-bottom: -45vh; /* <--- DEV BOŞLUĞU YOK EDEN KISIM BURASI */
+            }
             
             .coverup-iframe { 
                 height: 110vh; 
-                margin-top: 15px; 
+                margin-top: 0; /* Eski 15px'lik boşluk da kapatıldı */
             }
+            /* MOBİLDEKİ BOŞLUK DÜZELTMELERİ SONU */
 
             .bottom-gallery-iframe {
                 height: 75vh;
@@ -659,7 +671,7 @@
         .status-Cancelled { background: #fee2e2; color: #dc2626; }
 
         /* ========================================= */
-        /* UUDEN GALLERIAN CSS (Mukautettu sivustolle) */
+        /* COMPACT GALLERY CSS */
         /* ========================================= */
         :root{ --compact-h: 420px; }
         @media (max-width:520px){ :root{ --compact-h: 360px; } }
@@ -727,7 +739,7 @@
           position:fixed; inset:0;
           background:rgba(0,0,0,.94);
           display:none; align-items:center; justify-content:center;
-          z-index:99999; /* En üstte durması için 99999 yapıldı */
+          z-index:99999;
           padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
         }
         .compact-lb.show { display:flex; }
@@ -924,9 +936,6 @@
                 <img src="https://johnsimsek.github.io/Inkyvibes-tattoo-lettering/IMG_2383.JPEG" alt="Inky Vibes Tattoo logo">
             </div>
 
-            <!-- ========================================= -->
-            <!-- UUSI GALLERIA KUTUSU (Lightbox Dışarı Alındı) -->
-            <!-- ========================================= -->
             <div class="compact-wrap">
               <div class="compact-shell">
                 <div class="compact-top">
@@ -943,7 +952,6 @@
                 <div class="compact-thumbs" id="compact-thumbs"></div>
               </div>
             </div>
-            <!-- ========================================= -->
 
             <h2 class="ig-caption">Instagram Stories</h2>
 
@@ -966,10 +974,6 @@
         </section>
     </main>
 
-    <!-- ========================================= -->
-    <!-- LIGHTBOX BURAYA TAŞINDI (Sayfanın En Altına) -->
-    <!-- Bu sayede blur filtresine takılmayacak.   -->
-    <!-- ========================================= -->
     <div class="compact-lb" id="compact-lb" aria-hidden="true">
       <div class="compact-lbStage" id="compact-lbStage">
         <img class="compact-lbImg" id="compact-lbImg" src="" alt="" draggable="false">
@@ -980,7 +984,6 @@
         <div class="compact-lbCount" id="compact-lbCount">—</div>
       </div>
     </div>
-    <!-- ========================================= -->
 
     <script>
         document.body.classList.add('js-enabled');
@@ -1001,14 +1004,11 @@
         const bottomAppBar = document.getElementById("bottom-app-bar");
         const glassNav = document.getElementById("glass-nav");
 
-        // --- UPDATED FUNCTION: Allows calls without an event (e) ---
         function goToBooking(e) {
             if (e) e.preventDefault();
-            // This points to your new custom GitHub pages domain
             let targetUrl = "https://ajanvaraus.inkyvibestattoo.com/"; 
             
             if (currentUser) {
-                // If they are logged in, turn their data into a secure string for the URL
                 const encodedUser = encodeURIComponent(JSON.stringify(currentUser));
                 targetUrl += "?session=" + encodedUser;
             }
@@ -1016,12 +1016,10 @@
             window.location.href = targetUrl;
         }
 
-        // --- HIDE HEADER ON "VARAA AIKA" CLICK ---
         document.getElementById("booking-link").addEventListener("click", () => {
             glassNav.classList.add("hidden");
         });
 
-        // --- SHOW HEADER ON "ETUSIVU" CLICK ---
         document.getElementById("home-link").addEventListener("click", () => {
             glassNav.classList.remove("hidden");
         });
@@ -1346,17 +1344,13 @@
             btn.disabled = false;
         }
 
-        // --- NEW BRIDGE: Listen for the "Varaa aika nyt" click inside the 3D Animation iframe ---
         window.addEventListener("message", function(event) {
             if (event.data === "goToBooking") {
-                goToBooking(); // This grabs the session data and handles the navigation
+                goToBooking(); 
             }
         });
     </script>
     
-    <!-- ========================================= -->
-    <!-- UUDEN GALLERIAN JS (Mukautettu sivustolle) -->
-    <!-- ========================================= -->
     <script>
       (function() {
         const CONFIG = {
