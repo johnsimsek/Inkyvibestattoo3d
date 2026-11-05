@@ -87,7 +87,8 @@
             left: 0;
             width: 100%;
             max-width: 100%;
-            background: linear-gradient(135deg, rgba(20, 20, 20, 0.75), rgba(80, 80, 80, 0.65), rgba(220, 220, 220, 0.55));
+            /* Alkuperäinen gradientti, mutta tummempi alku/keskiosa */
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(40, 40, 40, 0.85), rgba(200, 200, 200, 0.55));
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -189,7 +190,8 @@
             left: -100%;
             width: 270px;
             height: 100vh;
-            background: rgba(255, 255, 255, 0.7);
+            /* Samanlainen dark-to-light gradientti sidebarille yhtenäisyyden vuoksi */
+            background: linear-gradient(160deg, rgba(0, 0, 0, 0.95), rgba(40, 40, 40, 0.85), rgba(200, 200, 200, 0.55));
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
             z-index: 3500;
@@ -197,15 +199,15 @@
             display: flex;
             flex-direction: column;
             padding: 80px 20px 20px 30px;
-            box-shadow: 5px 0 20px rgba(0, 0, 0, 0.05);
-            border-right: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 5px 0 20px rgba(0, 0, 0, 0.3);
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         #sidebar.open { left: 0; }
 
         #sidebar a {
             text-decoration: none;
-            color: #000000;
+            color: #ffffff;
             font-size: 16px;
             font-weight: 400;
             margin-bottom: 25px;
@@ -214,7 +216,7 @@
             line-height: 1.4;
         }
 
-        #sidebar a:hover { color: #666; }
+        #sidebar a:hover { color: #cccccc; }
 
         .close-btn {
             position: absolute;
@@ -224,6 +226,7 @@
             cursor: pointer;
             font-weight: 300;
             margin-bottom: 0 !important;
+            color: #ffffff;
         }
 
         #animation-container {
