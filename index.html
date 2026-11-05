@@ -304,15 +304,14 @@
             text-transform: uppercase;
         }
 
-        /* YENİ BOŞLUK DÜZELTMELERİ BURADA */
         .ig-iframe {
             width: 100%;
-            height: 85vh; /* Hikaye tam ekran açılabilsin diye uzun bırakıldı */
+            height: 85vh;
             border: none;
             display: block;
             position: relative;
-            z-index: 30; /* Alttaki menünün üstünde durmasını sağlar */
-            margin-bottom: -55vh; /* Masaüstünde alttaki boşluğu yokedip Coverup iframe'ini yukarı çeker! */
+            z-index: 30;
+            margin-bottom: -55vh;
         }
 
         .coverup-iframe {
@@ -320,11 +319,10 @@
             height: 90vh; 
             border: none;
             display: block;
-            margin-top: 0; /* Önceden 20px'di, boşluğu sıfırladık */
+            margin-top: 0;
             position: relative;
-            z-index: 10; /* Stories iframe'inin altında kalıp düzgün çalışmasını sağlar */
+            z-index: 10;
         }
-        /* YENİ BOŞLUK DÜZELTMELERİ SONU */
 
         .bottom-gallery-iframe {
             width: 100%;
@@ -407,17 +405,15 @@
                 margin: 20px 0 10px 0;
             }
 
-            /* MOBİLDEKİ BOŞLUK DÜZELTMELERİ */
             .ig-iframe { 
                 height: 65vh; 
-                margin-bottom: -45vh; /* <--- DEV BOŞLUĞU YOK EDEN KISIM BURASI */
+                margin-bottom: -45vh;
             }
             
             .coverup-iframe { 
                 height: 110vh; 
-                margin-top: 0; /* Eski 15px'lik boşluk da kapatıldı */
+                margin-top: 0;
             }
-            /* MOBİLDEKİ BOŞLUK DÜZELTMELERİ SONU */
 
             .bottom-gallery-iframe {
                 height: 75vh;
@@ -770,27 +766,39 @@
           -webkit-touch-callout:none;
         }
 
+        /* YENİ VE DAHA KÜÇÜK LİQUİD GLASS BUTON TASARIMI */
         .compact-lbBtn {
           position:absolute; z-index:3;
-          width:44px; height:44px; border-radius:14px;
-          border:1px solid rgba(255,255,255,.20);
-          background:rgba(255,255,255,.08);
-          color:#fff; font-size:24px; cursor:pointer;
+          width:34px; height:34px; /* Boyutlar daha da küçültüldü (38px'ten 34px'e) */
+          border-radius:10px;
+          border:1px solid rgba(255,255,255,.25);
+          background:rgba(20,20,20,.45); /* Liquid glass efektinin arkası */
+          backdrop-filter: blur(12px); /* Cam efekti bulanıklığı */
+          -webkit-backdrop-filter: blur(12px);
+          color:#fff; font-size:18px; cursor:pointer; /* İkon boyutu küçültüldü */
           display:grid; place-items:center;
           font-family: sans-serif;
+          transition: background 0.3s, transform 0.2s;
         }
+        .compact-lbBtn:active {
+          transform: scale(0.95);
+        }
+        
         .compact-lbClose {
-          top:calc(14px + env(safe-area-inset-top));
-          right:calc(14px + env(safe-area-inset-right));
+          top:calc(50px + env(safe-area-inset-top)); /* Belirgin şekilde daha aşağı çekildi */
+          right:calc(16px + env(safe-area-inset-right));
         }
         .compact-lbPlay {
-          top:calc(14px + env(safe-area-inset-top));
-          left:calc(14px + env(safe-area-inset-left));
-          font-size:18px;
+          top:calc(50px + env(safe-area-inset-top)); /* Belirgin şekilde daha aşağı çekildi */
+          left:calc(16px + env(safe-area-inset-left));
+          font-size:14px; /* Play/Pause ikonu daha da ufaltıldı */
         }
-        .compact-lbNav { top:50%; transform:translateY(-50%); padding-bottom: 3px; }
+        
+        /* Sağ-Sol oklar da uyumlu ve dengeli kalsın diye güncellendi */
+        .compact-lbNav { top:50%; transform:translateY(-50%); padding-bottom: 3px; font-size: 22px; }
         .compact-lbPrev { left:calc(14px + env(safe-area-inset-left)); }
         .compact-lbNext { right:calc(14px + env(safe-area-inset-right)); }
+        /* ---------------------------------- */
 
         .compact-lbCount {
           position:absolute; z-index:3;
@@ -872,7 +880,7 @@
         </div>
     </div>
 
-    <!-- Bottom app bar with working Etusivu and Ajanvaraus links -->
+    <!-- Bottom app bar -->
     <nav id="bottom-app-bar">
         <a href="https://www.inkyvibestattoo.com/" id="home-link" title="Etusivu" aria-label="Etusivu">
             <svg class="app-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -881,7 +889,6 @@
             </svg>
         </a>
 
-        <!-- UPDATED LINK: Now uses onclick to trigger the JS function -->
         <a href="#" onclick="goToBooking(event)" id="booking-link" title="Ajanvaraus" aria-label="Varaa aika tatuointiin">
             <svg class="app-icon" viewBox="0 0 24 24" aria-hidden="true">
                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
@@ -903,7 +910,6 @@
     <div id="sidebar">
         <a class="close-btn" id="close-btn" aria-label="Sulje valikko">&times;</a>
         <a href="https://www.inkyvibestattoo.com/">Etusivu</a>
-        <!-- UPDATED LINK: Now uses onclick to trigger the JS function -->
         <a href="#" onclick="goToBooking(event)">Ajanvaraus</a>
         <a href="https://lahjakortti.inkyvibestattoo.com/">Tatuointi Lahjakortti</a>
         <a href="https://johnsimsek.github.io/Create-your-own-tattoo/">Suunnittele Oma Tatuointisi</a>
@@ -912,8 +918,11 @@
         <a href="https://johnsimsek.github.io/OTA-YHTEYTT-/">Ota Yhteyttä</a>
     </div>
 
+    <!-- TIKLANABİLİR BAŞLIK -->
     <header id="glass-nav">
-        <h1 class="menu-text">INKY VIBES TATTOO</h1>
+        <h1 class="menu-text">
+            <a href="https://www.inkyvibestattoo.com/" style="text-decoration: none; color: inherit; cursor: pointer;">INKY VIBES TATTOO</a>
+        </h1>
         <button class="hamburger" id="hamburger-btn" type="button" aria-label="Avaa valikko">
             <span></span>
             <span></span>
@@ -936,6 +945,7 @@
                 <img src="https://johnsimsek.github.io/Inkyvibes-tattoo-lettering/IMG_2383.JPEG" alt="Inky Vibes Tattoo logo">
             </div>
 
+            <!-- COMPACT GALLERY -->
             <div class="compact-wrap">
               <div class="compact-shell">
                 <div class="compact-top">
@@ -974,6 +984,7 @@
         </section>
     </main>
 
+    <!-- LIGHTBOX -->
     <div class="compact-lb" id="compact-lb" aria-hidden="true">
       <div class="compact-lbStage" id="compact-lbStage">
         <img class="compact-lbImg" id="compact-lbImg" src="" alt="" draggable="false">
@@ -1308,7 +1319,7 @@
             const emailInput = document.getElementById("auth-email").value.trim();
 
             if (!emailInput) {
-                alert("Kirjoita sähköpostiosoitteesi ylempään kenttään ensin ja paina 'Unohditko salasanasi?'.");
+                alert("Kirjoita sähköpostiosoitteesi ylempään kenttään ensin ve paina 'Unohditko salasanasi?'.");
                 return;
             }
 
@@ -1346,7 +1357,7 @@
 
         window.addEventListener("message", function(event) {
             if (event.data === "goToBooking") {
-                goToBooking(); 
+                goToBooking();
             }
         });
     </script>
