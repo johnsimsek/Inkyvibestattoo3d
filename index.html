@@ -885,7 +885,7 @@
             </h1>
         </div>
         
-        <a href="#" id="open-auth-bar" title="Profiili" aria-label="Käyttäjäprofiili" style="display: flex; align-items: center; gap: 4px;">
+        <a href="#" id="open-auth-bar" title="Profiili" aria-label="Käyttäjäprofiili" style="display: flex; align-items: center; gap: 4px; text-decoration: none; border: none; outline: none;">
             <svg class="header-icon" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                 <circle cx="12" cy="7" r="4"></circle>
@@ -1028,8 +1028,8 @@
             if (currentUser) {
                 const firstName = currentUser.name ? currentUser.name.split(' ')[0] : 'Profiili';
                 authBtn.innerHTML = `
-                    <span style="color: #4ade80; font-size: 13px; font-weight: 600; margin-right: 6px; letter-spacing: 0.5px;">${firstName}</span>
-                    <svg class="header-icon" viewBox="0 0 24 24" aria-hidden="true" style="stroke: #4ade80; transform: scale(1.05);">
+                    <span style="color: #ffffff; font-size: 13px; font-weight: 600; margin-right: 6px; letter-spacing: 0.5px; text-decoration: none; border: none;">${firstName}</span>
+                    <svg class="header-icon" viewBox="0 0 24 24" aria-hidden="true" style="stroke: #ffffff; transform: scale(1.05);">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
