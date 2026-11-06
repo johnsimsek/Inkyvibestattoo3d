@@ -742,7 +742,7 @@
         @media (prefers-reduced-motion: reduce){ .compact-main{transition:none} }
 
         /* ========================================= */
-        /* YENİ ÖDEME YÖNTEMLERİ CSS (KÜÇÜLTÜLMÜŞ VE ORTALANMIŞ) */
+        /* YENİ ÖDEME YÖNTEMLERİ CSS */
         /* ========================================= */
         .payment-row {
           display: flex;
@@ -860,7 +860,7 @@
         </div>
     </div>
 
-    <!-- Sidebar with working Etusivu link -->
+    <!-- Sidebar -->
     <div id="sidebar">
         <a class="close-btn" id="close-btn" aria-label="Sulje valikko">&times;</a>
         <a href="https://www.inkyvibestattoo.com/">Etusivu</a>
@@ -872,7 +872,7 @@
         <a href="https://johnsimsek.github.io/OTA-YHTEYTT-/">Ota Yhteyttä</a>
     </div>
 
-    <!-- TIKLANABİLİR BAŞLIK -->
+    <!-- Header -->
     <header id="glass-nav">
         <div style="display: flex; align-items: center; gap: 15px;">
             <button class="hamburger" id="hamburger-btn" type="button" aria-label="Avaa valikko">
@@ -988,23 +988,41 @@
       </div>
     </div>
 
-    <!-- KIRJAUTUMISEN SYNKRONOINTI 3D-ANIMAATIOON -->
+    <!-- KIRJAUTUMISEN SYNKRONOINTI 3D-ANIMAATIOON JA RESERVATIOON -->
     <script>
         document.body.classList.add('js-enabled');
 
         const AUTH_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzcwVZTxNs4uSKA1RPU14FkDJRn11jqeIut3_q01O6rR1Cdh4cK64wGj6wvPpMke4qJrw/exec";
 
         let currentUser = null;
-        try {
-            const storedUser = localStorage.getItem("inky_user");
-            if (storedUser) {
-                currentUser = JSON.parse(storedUser);
+
+        // 1. Ajanvaraus-sivulta tultaessa tarkistetaan URL'deki session parametresi
+        const urlParams = new URLSearchParams(window.location.search);
+        const sessionParam = urlParams.get('session');
+        
+        if (sessionParam) {
+            try {
+                currentUser = JSON.parse(decodeURIComponent(sessionParam));
+                localStorage.setItem("inky_user", JSON.stringify(currentUser));
+                window.history.replaceState({}, document.title, window.location.pathname);
+            } catch (e) {
+                console.warn("URL session okuma hatası:", e);
             }
-        } catch (e) {
-            console.warn("Virhe luettaessa käyttäjätietoja:", e);
         }
 
-        // PÄIVITYS: Visuaalinen muutos yläpalkin ikoniin kirjautuessa
+        // 2. Eğer URL'de yoksa normal localStorage hafızasından oku
+        if (!currentUser) {
+            try {
+                const storedUser = localStorage.getItem("inky_user");
+                if (storedUser) {
+                    currentUser = JSON.parse(storedUser);
+                }
+            } catch (e) {
+                console.warn("Virhe luettaessa käyttäjätietoja:", e);
+            }
+        }
+
+        // Sağ üstteki profil ikonunu (Avatar) giriş durumuna göre güncelleyen fonksiyon
         function updateHeaderAvatar() {
             const authBtn = document.getElementById("open-auth-bar");
             if (currentUser) {
@@ -1026,7 +1044,7 @@
             }
         }
 
-        // Päivitä ikoni heti sivun ladatessa
+        // Sayfa açıldığında ikonu hemen güncelle
         updateHeaderAvatar();
         
         function notifyAnimationIframe() {
@@ -1042,6 +1060,7 @@
         }
         window.addEventListener('load', notifyAnimationIframe);
 
+        // Rezervasyon sayfasına giderken oturum bilgisini URL'ye ekleme fonksiyonu
         function goToBooking(e) {
             if (e) e.preventDefault();
             let targetUrl = "https://ajanvaraus.inkyvibestattoo.com/"; 
@@ -1178,7 +1197,7 @@
                 console.warn("Uloskirjautumisvirhe:", e);
             }
             currentUser = null;
-            updateHeaderAvatar(); // PÄIVITÄ ICON
+            updateHeaderAvatar();
             notifyAnimationIframe();
             profilePopup.classList.remove("show");
             alert("Olet kirjautunut ulos.");
@@ -1271,7 +1290,7 @@
                     }
                     
                     currentUser = data.user;
-                    updateHeaderAvatar(); // PÄIVITÄ ICON
+                    updateHeaderAvatar();
                     notifyAnimationIframe();
 
                     alert(
@@ -1392,7 +1411,7 @@
             btn.disabled = false;
         }
 
-        // PÄIVITYS: Laajennettu viestien kuuntelija tukemaan 3D-animaation kirjautumista
+        // 3D Animasyon ile iletişim kuran mesaj dinleyicisi
         window.addEventListener("message", function(event) {
             let data = event.data;
             let action = typeof data === "string" ? data : data?.action;
@@ -1404,14 +1423,12 @@
                 notifyAnimationIframe();
             }
             else if (action === "loginSuccess" && data.user) {
-                // Synkronoi kirjautuminen (esim. animaatiosta) tälle sivulle
                 currentUser = data.user;
                 localStorage.setItem("inky_user", JSON.stringify(currentUser));
                 updateHeaderAvatar();
                 notifyAnimationIframe(); 
             }
             else if (action === "logout") {
-                // Synkronoi uloskirjautuminen
                 currentUser = null;
                 localStorage.removeItem("inky_user");
                 updateHeaderAvatar();
