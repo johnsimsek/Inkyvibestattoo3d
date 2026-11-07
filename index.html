@@ -201,7 +201,7 @@
         }
 
         #animation-container {
-            height: 35vh; /* Much shorter height */
+            height: 35vh;
             min-height: 250px;
             width: 100%;
             position: relative;
@@ -209,8 +209,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-top: 0; /* Pulls the container to the absolute top, removing the white gap */
-            padding-top: 65px; /* Ensures the video itself doesn't hide behind the navigation bar */
+            margin-top: 0; 
+            padding-top: 65px;
         }
 
         .animation-iframe {
@@ -1156,15 +1156,14 @@
         document.getElementById("open-auth-bar").addEventListener("click", (e) => {
             e.preventDefault();
 
+            // Only update currentUser if data is found, otherwise keep the existing session
             try {
                 const storedUser = localStorage.getItem("inky_user");
                 if (storedUser) {
                     currentUser = JSON.parse(storedUser);
-                } else {
-                    currentUser = null;
                 }
             } catch (e) {
-                currentUser = null;
+                console.warn("Virhe luettaessa localStoragea:", e);
             }
 
             if (currentUser) {
