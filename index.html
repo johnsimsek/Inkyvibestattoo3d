@@ -201,21 +201,22 @@
         }
 
         #animation-container {
-            height: 200vh;
+            height: 35vh; /* Much shorter height */
+            min-height: 250px;
             width: 100%;
             position: relative;
             background-color: #000000;
-            -webkit-mask-image: none;
-            mask-image: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 0; /* Pulls the container to the absolute top, removing the white gap */
+            padding-top: 65px; /* Ensures the video itself doesn't hide behind the navigation bar */
         }
 
         .animation-iframe {
             display: block;
             width: 100%;
-            height: 100vh;
-            height: 100svh;
-            position: sticky;
-            top: 0;
+            height: 100%;
             border: none;
         }
 
@@ -224,8 +225,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 100vh;
-            height: 100svh;
+            height: 100%;
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
@@ -248,7 +248,7 @@
             z-index: 10;
             background: rgba(255, 255, 255, 0.4);
             backdrop-filter: blur(15px);
-            padding-top: 60px;
+            padding-top: 40px;
             padding-bottom: 80px;
         }
 
@@ -896,9 +896,9 @@
     <main>
         <section id="animation-container">
             <iframe
-                src="https://johnsimsek.github.io/inky-vibes-animation/?v=20261021-hand2"
+                src="https://johnsimsek.github.io/Websitecover-video/"
                 class="animation-iframe"
-                title="Inky Vibes Tattoo - visuaalinen animaatio">
+                title="Inky Vibes Tattoo - Esittelyvideo">
             </iframe>
             <div id="bokeh-overlay"></div>
         </section>
