@@ -636,10 +636,51 @@
         .compact-shell { border:1px solid rgba(255,255,255,.10); border-radius:16px; overflow:hidden; background:#000; color:#eaeaea; }
 
         .compact-top {
-          height:44px; display:flex; align-items:center; justify-content:flex-end;
-          padding:0 12px; border-bottom:1px solid rgba(255,255,255,.06);
+          height:44px; display:flex; align-items:center; justify-content:space-between;
+          padding:0 14px; border-bottom:1px solid rgba(255,255,255,.06);
+        }
+        .compact-top-right {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-left: auto;
         }
         .compact-count { font-size:12px; letter-spacing:.18em; color:#9a9a9a; }
+
+        /* --- SLOWER PULSING GREY GLOW CIRCLE CSS --- */
+        .pulse-circle-container {
+          width: 18px;
+          height: 18px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+        }
+        .pulse-circle {
+          width: 8px;
+          height: 8px;
+          background: #8e8e93;
+          border-radius: 50%;
+          box-shadow: 0 0 8px rgba(142, 142, 147, 0.75), 0 0 16px rgba(142, 142, 147, 0.35);
+          animation: pulseGlowAnimation 5s ease-in-out infinite;
+        }
+        @keyframes pulseGlowAnimation {
+          0% {
+            transform: scale(0.85);
+            opacity: 0.5;
+            box-shadow: 0 0 4px rgba(142, 142, 147, 0.4), 0 0 8px rgba(142, 142, 147, 0.2);
+          }
+          50% {
+            transform: scale(1.2);
+            opacity: 1;
+            box-shadow: 0 0 10px rgba(142, 142, 147, 0.9), 0 0 20px rgba(142, 142, 147, 0.5);
+          }
+          100% {
+            transform: scale(0.85);
+            opacity: 0.5;
+            box-shadow: 0 0 4px rgba(142, 142, 147, 0.4), 0 0 8px rgba(142, 142, 147, 0.2);
+          }
+        }
 
         .compact-stage {
           position:relative; height:var(--compact-h);
@@ -932,7 +973,12 @@
             <div class="compact-wrap">
               <div class="compact-shell">
                 <div class="compact-top">
-                  <div class="compact-count" id="compact-count">—</div>
+                  <div class="pulse-circle-container">
+                    <div class="pulse-circle"></div>
+                  </div>
+                  <div class="compact-top-right">
+                    <div class="compact-count" id="compact-count">—</div>
+                  </div>
                 </div>
 
                 <div class="compact-stage" id="compact-stage">
