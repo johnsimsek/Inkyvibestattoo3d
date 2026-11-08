@@ -431,7 +431,7 @@
 
         /* UUDET TYYLIT SPINWHEEL-POPUPILLE (Poistaa valkoisen ala-osan) */
         #spinwheel-popup .popup-content {
-            height: 515px; /* Lyhennetty vähentämään tyhjää tilaa alhaalla / Shortened to reduce empty space at the bottom */
+            height: 515px; 
             width: 90%;
             max-width: 350px;
             background: #0f0f14;
@@ -1177,7 +1177,6 @@
         document.getElementById("open-auth-bar").addEventListener("click", (e) => {
             e.preventDefault();
 
-            // Only update currentUser if data is found, otherwise keep the existing session
             try {
                 const storedUser = localStorage.getItem("inky_user");
                 if (storedUser) {
@@ -1431,12 +1430,18 @@
             btn.disabled = false;
         }
 
-        // 3D Animasyon ile iletişim kuran mesaj dinleyicisi
+        // Kuunnellaan viestejä iframe-komponenteista (mukaan lukien Spin Wheel sulkemiskomento)
         window.addEventListener("message", function(event) {
             let data = event.data;
             let action = typeof data === "string" ? data : data?.action;
 
-            if (action === "goToBooking" || action === "openBooking") {
+            if (action === "closeTattooPopup") {
+                const spinPopup = document.getElementById("spinwheel-popup");
+                if (spinPopup) {
+                    spinPopup.classList.remove("show");
+                }
+            }
+            else if (action === "goToBooking" || action === "openBooking") {
                 goToBooking();
             }
             else if (action === "checkLoginState") {
