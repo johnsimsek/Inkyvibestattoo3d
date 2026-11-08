@@ -393,14 +393,16 @@
             }
         }
 
+        /* YLEINEN OVERLAY TYYLI - iOS BLUR KORJAUS */
         .popup-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100vh;
+            height: 100%; /* Vaihdettu 100vh -> 100% poistamaan alhaalta tyhjä tila iOS:ssa */
             background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px); /* Tämä vaaditaan iOS Safarille */
             z-index: 4000;
             display: flex;
             align-items: center;
@@ -427,9 +429,9 @@
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         }
 
-        /* UUDET TYYLIT SPINWHEEL-POPUPILLE (Poistaa valkoiset reunukset ja täyttää taustan) */
+        /* UUDET TYYLIT SPINWHEEL-POPUPILLE (Poistaa valkoisen ala-osan) */
         #spinwheel-popup .popup-content {
-            height: 620px;
+            height: 460px; /* Pienennetty korkeus leikkaa pois valkoisen laatikon */
             width: 90%;
             max-width: 350px;
             background: #0f0f14;
@@ -551,9 +553,10 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 100vh;
+            height: 100%;
             background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             z-index: 4000;
             display: flex;
             align-items: center;
