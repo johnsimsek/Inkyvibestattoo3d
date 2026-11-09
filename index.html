@@ -931,10 +931,8 @@
 
     <!-- WALKIN FLASHES POPUP (DIREKT FOTO GÖRÜNÜMÜ YERELDEN) -->
     <div id="walkin-popup" class="popup-overlay">
-        <!-- Arkaplan tamamen şeffaf, sadece senin Github'a ekleyeceğin görsel görünür -->
         <div class="popup-content">
             <span class="popup-close" onclick="document.getElementById('walkin-popup').classList.remove('show')">&times;</span>
-            <!-- KENDİ GİTHUB'INA YÜKLEYECEĞİN RESİM -->
             <img src="walkin.png" alt="Walk-In Flashes" style="width: 100%; height: auto; border-radius: 12px; object-fit: contain; max-height: 85vh; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
         </div>
     </div>
@@ -962,11 +960,24 @@
                 <form id="auth-form">
                     <input type="text" id="auth-name" placeholder="Koko Nimi" class="auth-input signup-field" style="display: none;">
                     <input type="tel" id="auth-phone" placeholder="Puhelinnumero" value="+358" class="auth-input signup-field" style="display: none;">
+                    
                     <input type="email" id="auth-email" placeholder="Sähköpostiosoite" class="auth-input" required>
                     
+                    <!-- NEW PASSWORD FIELD WITH SVG EYE ICON -->
                     <div style="position: relative; margin-bottom: 15px;">
                         <input type="password" id="auth-pass" placeholder="Salasana" class="auth-input" style="margin-bottom: 0; padding-right: 45px;" required>
-                        <span id="toggle-password" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 16px; color: #333; user-select: none;">👁️</span>
+                        <span id="toggle-password" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #666; display: flex; align-items: center; justify-content: center; height: 100%; user-select: none;">
+                            <!-- Eye Open SVG -->
+                            <svg id="eye-icon-open" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                            <!-- Eye Closed SVG (Hidden by default) -->
+                            <svg id="eye-icon-closed" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                                <line x1="1" y1="1" x2="23" y2="23"></line>
+                            </svg>
+                        </span>
                     </div>
 
                     <div style="text-align:right; margin-top:-10px; margin-bottom:15px; font-size:11px;">
@@ -1314,21 +1325,38 @@
 
         const authPopup = document.getElementById("auth-popup");
         const profilePopup = document.getElementById("profile-popup");
+        
         const authPhone = document.getElementById("auth-phone");
 
+        // Native Browser validation for the phone number
         authPhone.addEventListener("input", function() {
-            if (!this.value.startsWith("+358")) this.value = "+358";
+            // Keep +358 lock
+            if (!this.value.startsWith("+358")) {
+                this.value = "+358";
+            }
+            
+            // Check if user has entered real numbers after +358 (length > 7 ensures they typed something)
+            if (this.value === "+358" || this.value.length < 7) {
+                this.setCustomValidity("Syötä voimassa oleva puhelinnumero."); 
+            } else {
+                this.setCustomValidity(""); // Field is valid
+            }
         });
 
-        // Toggle password visibility function
+        // Toggle Password Eye logic
         document.getElementById("toggle-password").addEventListener("click", function() {
             const passInput = document.getElementById("auth-pass");
+            const eyeOpen = document.getElementById("eye-icon-open");
+            const eyeClosed = document.getElementById("eye-icon-closed");
+            
             if (passInput.type === "password") {
                 passInput.type = "text";
-                this.textContent = "🙈"; 
+                eyeOpen.style.display = "none";
+                eyeClosed.style.display = "block";
             } else {
                 passInput.type = "password";
-                this.textContent = "👁️";
+                eyeOpen.style.display = "block";
+                eyeClosed.style.display = "none";
             }
         });
 
@@ -1398,6 +1426,13 @@
                 signupFields.forEach(field => {
                     field.style.display = "block";
                     field.required = true;
+                    
+                    // Reset validation when showing signup form
+                    if(field.id === "auth-phone") {
+                        if (field.value === "+358" || field.value.length < 7) {
+                            field.setCustomValidity("Syötä voimassa oleva puhelinnumero."); 
+                        }
+                    }
                 });
             }
         });
@@ -1407,16 +1442,6 @@
 
             const btn = document.getElementById("auth-submit-btn");
             const originalText = btn.innerText;
-
-            // Extra manual check for signup: phone number MUST be entered correctly
-            if (!isLogin) {
-                const phoneVal = document.getElementById("auth-phone").value.trim();
-                // If it's just +358 or very short, reject it
-                if (phoneVal === "" || phoneVal === "+358" || phoneVal.length < 7) {
-                    alert("Syötä voimassa oleva puhelinnumero."); // Please enter a valid phone number
-                    return;
-                }
-            }
 
             btn.disabled = true;
             btn.innerText = "Odottaa...";
