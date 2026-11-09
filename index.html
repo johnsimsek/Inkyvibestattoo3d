@@ -212,8 +212,8 @@
             left: -100%;
             width: 270px;
             height: 100vh;
-            /* MUUTETTU: Tummempi tausta jotta valkoinen teksti erottuu selkeästi */
-            background: linear-gradient(150deg, rgba(10, 10, 15, 0.96) 0%, rgba(15, 15, 20, 0.94) 50%, rgba(5, 5, 10, 0.97) 100%);
+            /* MUUTETTU: Koyu ama eskisinden biraz daha aydınlık, zarif bir cam efekti */
+            background: linear-gradient(150deg, rgba(20, 20, 25, 0.85) 0%, rgba(25, 25, 30, 0.82) 50%, rgba(15, 15, 20, 0.88) 100%);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
             z-index: 3500;
@@ -236,7 +236,7 @@
             letter-spacing: 1px;
             transition: color 0.3s;
             line-height: 1.4;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.5); /* Lisätty selkeyttä tekstille */
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
         }
 
         #sidebar a:hover { color: #cccccc; }
@@ -573,6 +573,30 @@
             margin-bottom: 15px;
         }
 
+        /* YENİ: Input Wrapper ve Required Star stilleri */
+        .input-wrapper {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .input-wrapper .auth-input {
+            margin-bottom: 0;
+            padding-right: 35px; /* Yıldız için boşluk */
+        }
+
+        .req-star {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ef4444; /* Kırmızı renk */
+            font-size: 20px;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            pointer-events: none; /* Tıklamayı engelle */
+            line-height: 1;
+        }
+
         .auth-input {
             width: 100%;
             padding: 14px 20px;
@@ -583,7 +607,6 @@
             font-size: 14px;
             outline: none;
             transition: border 0.3s;
-            margin-bottom: 15px;
         }
 
         .auth-input:focus {
@@ -929,7 +952,7 @@
         <span class="announce-text">30.11 Walk-In Day - <span id="announce-link" class="highlight-link">Rekisteröidy ja näe flash-kuvat!</span></span>
     </div>
 
-    <!-- WALKIN FLASHES POPUP (DIREKT FOTO GÖRÜNÜMÜ YERELDEN) -->
+    <!-- WALKIN FLASHES POPUP -->
     <div id="walkin-popup" class="popup-overlay">
         <div class="popup-content">
             <span class="popup-close" onclick="document.getElementById('walkin-popup').classList.remove('show')">&times;</span>
@@ -958,20 +981,35 @@
                 <p class="auth-desc">Tilaa Ink Vibes -tatuointisähköpostit saadaksesi eksklusiivisia tarjouksia, alennuksia, viimeisimmät uutiset ja inspiroivaa sisältöä sekä tietoa walk-in-päivistä.</p>
 
                 <form id="auth-form">
-                    <input type="text" id="auth-name" placeholder="Koko Nimi" class="auth-input signup-field" style="display: none;">
-                    <input type="tel" id="auth-phone" placeholder="Puhelinnumero" value="+358" class="auth-input signup-field" style="display: none;">
                     
-                    <input type="email" id="auth-email" placeholder="Sähköpostiosoite" class="auth-input" required>
+                    <!-- YENİ: Name alanı required class ile -->
+                    <div class="input-wrapper signup-wrapper" style="display: none;">
+                        <input type="text" id="auth-name" placeholder="Koko Nimi" class="auth-input">
+                        <span class="req-star">*</span>
+                    </div>
+
+                    <!-- YENİ: Phone alanı required class ile -->
+                    <div class="input-wrapper signup-wrapper" style="display: none;">
+                        <input type="tel" id="auth-phone" placeholder="Puhelinnumero" value="+358" class="auth-input">
+                        <span class="req-star">*</span>
+                    </div>
                     
-                    <div style="position: relative; margin-bottom: 15px;">
-                        <input type="password" id="auth-pass" placeholder="Salasana" class="auth-input" style="margin-bottom: 0; padding-right: 45px;" required>
+                    <div class="input-wrapper">
+                        <input type="email" id="auth-email" placeholder="Sähköpostiosoite" class="auth-input" required>
+                        <span class="req-star">*</span>
+                    </div>
+                    
+                    <div class="input-wrapper">
+                        <!-- Password alanı için padding-right değerini daha büyük tuttuk ki yıldız ve göz ikonu sığsın -->
+                        <input type="password" id="auth-pass" placeholder="Salasana" class="auth-input" style="padding-right: 55px;" required>
+                        <span class="req-star" style="right: 40px;">*</span>
                         <span id="toggle-password" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #666; display: flex; align-items: center; justify-content: center; height: 100%; user-select: none;">
                             <!-- Eye Open SVG -->
                             <svg id="eye-icon-open" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                                 <circle cx="12" cy="12" r="3"></circle>
                             </svg>
-                            <!-- Eye Closed SVG (Hidden by default) -->
+                            <!-- Eye Closed SVG -->
                             <svg id="eye-icon-closed" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
                                 <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
                                 <line x1="1" y1="1" x2="23" y2="23"></line>
@@ -1175,9 +1213,7 @@
                 if (storedUser) {
                     currentUser = JSON.parse(storedUser);
                 }
-            } catch (e) {
-                console.warn("Virhe luettaessa käyttäjätietoja:", e);
-            }
+            } catch (e) {}
         }
 
         function handleWalkInClick() {
@@ -1294,7 +1330,6 @@
             try {
                 const lastShown = localStorage.getItem("spinwheel_last_shown");
                 const now = new Date().getTime();
-
                 if (!lastShown || now - lastShown > 86400000) {
                     spinwheelPopup.classList.add("show");
                     localStorage.setItem("spinwheel_last_shown", now);
@@ -1324,13 +1359,19 @@
 
         const authPopup = document.getElementById("auth-popup");
         const profilePopup = document.getElementById("profile-popup");
-        
         const authPhone = document.getElementById("auth-phone");
 
-        // Keep +358 lock
+        // Native Browser validation for the phone number
         authPhone.addEventListener("input", function() {
             if (!this.value.startsWith("+358")) {
                 this.value = "+358";
+            }
+            if (!isLogin) {
+                if (this.value === "+358" || this.value.length < 7) {
+                    this.setCustomValidity("Syötä voimassa oleva puhelinnumero."); 
+                } else {
+                    this.setCustomValidity(""); 
+                }
             }
         });
 
@@ -1394,7 +1435,7 @@
 
         let isLogin = true;
         const authToggleBtn = document.getElementById("auth-toggle-btn");
-        const signupFields = document.querySelectorAll(".signup-field");
+        const signupWrappers = document.querySelectorAll(".signup-wrapper");
 
         authToggleBtn.addEventListener("click", (e) => {
             e.preventDefault();
@@ -1405,19 +1446,27 @@
                 document.getElementById("auth-submit-btn").innerText = "Kirjaudu";
                 authToggleBtn.innerText = "Eikö sinulla ole tiliä? Rekisteröidy tästä";
 
-                signupFields.forEach(field => {
-                    field.style.display = "none";
-                    field.required = false;
+                signupWrappers.forEach(wrapper => {
+                    wrapper.style.display = "none";
+                    wrapper.querySelector("input").required = false;
                 });
             } else {
                 document.getElementById("auth-title").innerText = "Luo tili";
                 document.getElementById("auth-submit-btn").innerText = "Rekisteröidy";
                 authToggleBtn.innerText = "Onko sinulla jo tili? Kirjaudu sisään";
 
-                signupFields.forEach(field => {
-                    field.style.display = "block";
-                    // Dynamically setting HTML5 required attribute for Signup
-                    field.required = true;
+                signupWrappers.forEach(wrapper => {
+                    wrapper.style.display = "block";
+                    const input = wrapper.querySelector("input");
+                    input.required = true;
+                    
+                    if(input.id === "auth-phone") {
+                        if (input.value === "+358" || input.value.length < 7) {
+                            input.setCustomValidity("Syötä voimassa oleva puhelinnumero."); 
+                        } else {
+                            input.setCustomValidity(""); 
+                        }
+                    }
                 });
             }
         });
@@ -1425,7 +1474,7 @@
         document.getElementById("auth-form").addEventListener("submit", async (e) => {
             e.preventDefault();
 
-            // Additional strict check during signup
+            // Kayıt (Signup) sırasında ekstra kontrol
             if (!isLogin) {
                 const nameVal = document.getElementById("auth-name").value.trim();
                 const phoneVal = document.getElementById("auth-phone").value.trim();
@@ -1435,7 +1484,6 @@
                     return;
                 }
                 
-                // If they only left "+358" or didn't type enough digits, block registration
                 if (phoneVal === "+358" || phoneVal.length < 7) {
                     alert("Syötä voimassa oleva puhelinnumero."); 
                     return;
