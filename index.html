@@ -27,7 +27,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://www.inkyvibestattoo.com/">
     <meta name="twitter:title" content="Inky Vibes Tattoo | Tatuointistudio Kouvola, Kotka & Kymenlaakso">
-    <meta name="twitter:description" content="Ammattitaitoinen tatuointistudio Kouvolassa, palvellen myös asiakkaita Kotkassa ja muualla Kymenlaaksossa. Custom-tatuoinnit, realistiset mustaharmaat kuvat ve peitetatuoinnit.">
+    <meta name="twitter:description" content="Ammattitaitoinen tatuointistudio Kouvolassa, palvellen myös asiakkaita Kotkassa ve muualla Kymenlaaksossa. Custom-tatuoinnit, realistiset mustaharmaat kuvat ve peitetatuoinnit.">
     <meta name="twitter:image" content="https://johnsimsek.github.io/Inkyvibes-tattoo-lettering/IMG_2383.JPEG">
 
     <!-- Google JSON-LD Structured Data -->
@@ -449,7 +449,7 @@
             left: 0;
             width: 100%;
             height: 100%; 
-            background: rgba(0, 0, 0, 0.85); /* Arka plan biraz daha koyulaştırıldı resim öne çıksın diye */
+            background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px); 
             z-index: 4000;
@@ -488,6 +488,7 @@
             height: auto; 
             max-height: 90vh; 
             display: flex; 
+            flex-direction: column;
             align-items: center; 
             justify-content: center;
             overflow: visible;
@@ -927,13 +928,13 @@
         <span class="announce-text">30.11 Walk-In Day - <span id="announce-link" class="highlight-link">Rekisteröidy ja näe flash-kuvat!</span></span>
     </div>
 
-    <!-- WALKIN FLASHES POPUP (DIREKT FOTO GÖRÜNÜMÜ) -->
+    <!-- WALKIN FLASHES POPUP (DIREKT FOTO GÖRÜNÜMÜ YERELDEN) -->
     <div id="walkin-popup" class="popup-overlay">
-        <!-- Arkaplan tamamen şeffaf, sadece görsel ve X butonu görünür -->
+        <!-- Arkaplan tamamen şeffaf, sadece senin Github'a ekleyeceğin görsel görünür -->
         <div class="popup-content">
             <span class="popup-close" onclick="document.getElementById('walkin-popup').classList.remove('show')">&times;</span>
-            <!-- Drive Linkini doğrudan resim kaynağı (src) olarak çeken sistem -->
-            <img src="https://drive.google.com/uc?export=view&id=1akYDKAJLX0zuSo94WB1VFGBMukL3MCUs" alt="Walk-In Flashes" style="width: 100%; height: auto; border-radius: 12px; object-fit: contain; max-height: 85vh; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+            <!-- KENDİ GİTHUB'INA YÜKLEYECEĞİN RESİM -->
+            <img src="walkin.png" alt="Walk-In Flashes" style="width: 100%; height: auto; border-radius: 12px; object-fit: contain; max-height: 85vh; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
         </div>
     </div>
 
@@ -1166,7 +1167,7 @@
         }
 
         // --- YENİ TIKLAMA FONKSİYONU ---
-        // Giriş yapılmışsa pop-up içinde sadece resmi açar
+        // Giriş yapılmışsa pop-up içinde Github'dan çekilen resim açılır
         function handleWalkInClick() {
             if (currentUser) {
                 document.getElementById('walkin-popup').classList.add('show');
@@ -1564,7 +1565,7 @@
             const emailInput = document.getElementById("auth-email").value.trim();
 
             if (!emailInput) {
-                alert("Kirjoita sähköpostiosoitteesi ylempään kenttään ensin ja paina 'Unohditko salasanasi?'.");
+                alert("Kirjoita sähköpostiosoitteesi ylempään kenttään ensin ve paina 'Unohditko salasanasi?'.");
                 return;
             }
 
