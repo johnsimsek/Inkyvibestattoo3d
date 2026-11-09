@@ -27,7 +27,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://www.inkyvibestattoo.com/">
     <meta name="twitter:title" content="Inky Vibes Tattoo | Tatuointistudio Kouvola, Kotka & Kymenlaakso">
-    <meta name="twitter:description" content="Ammattitaitoinen tatuointistudio Kouvolassa, palvellen myös asiakkaita Kotkassa ja muualla Kymenlaaksossa. Custom-tatuoinnit, realistiset mustaharmaat kuvat ja peitetatuoinnit.">
+    <meta name="twitter:description" content="Ammattitaitoinen tatuointistudio Kouvolassa, palvellen myös asiakkaita Kotkassa ja muualla Kymenlaaksossa. Custom-tatuoinnit, realistiset mustaharmaat kuvat ve peitetatuoinnit.">
     <meta name="twitter:image" content="https://johnsimsek.github.io/Inkyvibes-tattoo-lettering/IMG_2383.JPEG">
 
     <!-- Google JSON-LD Structured Data -->
@@ -117,7 +117,7 @@
         #announcement-bar .highlight-link {
             text-decoration: underline; 
             text-underline-offset: 2px; 
-            font-size: 10px; /* Sadece bu kısım daha küçük */
+            font-size: 10px; 
             margin-left: 2px;
         }
 
@@ -145,7 +145,7 @@
             justify-content: space-between;
             opacity: 1;
             pointer-events: auto;
-            transition: transform 0.6s ease, opacity 0.4s ease, top 0.4s ease; /* top transition eklendi */
+            transition: transform 0.6s ease, opacity 0.4s ease, top 0.4s ease;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
         }
 
@@ -900,24 +900,19 @@
 <body>
     <!-- ANNOUNCEMENT BAR -->
     <div id="announcement-bar" onclick="handleWalkInClick()">
-        <span class="announce-text">30.11 Walk-In Day - <span class="highlight-link">Rekisteröidy ja näe flash-kuvat!</span></span>
+        <span class="announce-text">30.11 Walk-In Day - <span id="announce-link" class="highlight-link">Rekisteröidy ja näe flash-kuvat!</span></span>
     </div>
 
-    <!-- WALKIN FLASHES POPUP -->
+    <!-- WALKIN FLASHES POPUP (DIREKT FOTO GÖRÜNÜMÜ) -->
     <div id="walkin-popup" class="popup-overlay">
-        <div class="popup-content" style="padding: 30px; height: auto; max-height: 85vh; overflow-y: auto;">
-            <span class="popup-close" onclick="document.getElementById('walkin-popup').classList.remove('show')">&times;</span>
+        <!-- Arkaplan şeffaf ve sınırsız görünümle doğrudan resim açılıyor gibi tasarlandı -->
+        <div class="popup-content" style="padding: 0; background: transparent; border: none; box-shadow: none; max-width: 500px; height: auto; max-height: 90vh; overflow-y: auto;">
+            <span class="popup-close" style="top: 10px; right: 10px; z-index: 10; background: rgba(255,255,255,0.8);" onclick="document.getElementById('walkin-popup').classList.remove('show')">&times;</span>
 
-            <h3 style="text-align:center; margin-top:0; margin-bottom:20px; font-weight:600;">Walk-In Flashes</h3>
-
-            <div style="display:flex; flex-direction:column; gap:15px; align-items:center;">
-                <!-- Kuvat ladataan Githubin hakemistosta (onerror piilottaa kuvan, jos sitä ei ole olemassa) -->
-                <img src="walkin.png" alt="Walk-In Flash 1" style="width:100%; border-radius:10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" onerror="this.style.display='none'">
-                <img src="walkin2.png" alt="Walk-In Flash 2" style="width:100%; border-radius:10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" onerror="this.style.display='none'">
-                
-                <p style="font-size:13px; text-align:center; margin-bottom:10px;">Voit myös tarkastella kuvia suoraan Google Drivesta:</p>
-                
-                <a href="https://drive.google.com/drive/folders/1RtsRv7OhPWF8JLv1_5sv0rIxBSfLNCLp" target="_blank" class="auth-btn" style="text-decoration:none; text-align:center; margin-top:0;">Avaa Drive-Kansio</a>
+            <div style="display:flex; flex-direction:column; gap:10px; align-items:center;">
+                <!-- Doğrudan yüklenen resimler -->
+                <img src="walkin.png" alt="Walk-In Flash 1" style="width:100%; border-radius: 12px;" onerror="this.style.display='none'">
+                <img src="walkin2.png" alt="Walk-In Flash 2" style="width:100%; border-radius: 12px;" onerror="this.style.display='none'">
             </div>
         </div>
     </div>
@@ -1164,7 +1159,10 @@
 
         function updateHeaderAvatar() {
             const authBtn = document.getElementById("open-auth-bar");
+            const announceLink = document.getElementById("announce-link"); // Dinamik duyuru yazısı için
+
             if (currentUser) {
+                // Login olunmuşsa
                 const firstName = currentUser.name ? currentUser.name.split(' ')[0] : 'Profiili';
                 authBtn.innerHTML = `
                     <span style="color: #ffffff; font-size: 13px; font-weight: 600; margin-right: 6px; letter-spacing: 0.5px; text-decoration: none; border: none;">${firstName}</span>
@@ -1173,13 +1171,24 @@
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
                 `;
+                
+                // Login ise metni güncelleyelim
+                if(announceLink) {
+                    announceLink.innerText = "Näe flash-kuvat";
+                }
             } else {
+                // Login olunmamışsa
                 authBtn.innerHTML = `
                     <svg class="header-icon" viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
                 `;
+                
+                // Login değilse varsayılan metin
+                if(announceLink) {
+                    announceLink.innerText = "Rekisteröidy ja näe flash-kuvat!";
+                }
             }
         }
 
@@ -1235,16 +1244,16 @@
         }
         window.addEventListener('scroll', removeIntroBlur, { passive: true, once: true });
 
-        // --- YENİ EKLENEN KOD: SCROLL İLE BAR GİZLEME/GÖSTERME ---
+        // --- SCROLL İLE BAR GİZLEME/GÖSTERME ---
         window.addEventListener('scroll', () => {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             const announceBar = document.getElementById('announcement-bar');
             const glassNav = document.getElementById('glass-nav');
             
-            if (scrollTop > 40) { // 40px aşağı inildiğinde gizle
+            if (scrollTop > 40) { 
                 announceBar.classList.add('hidden-bar');
                 glassNav.classList.add('shifted-up');
-            } else { // Yukarı çıkıldığında geri getir
+            } else { 
                 announceBar.classList.remove('hidden-bar');
                 glassNav.classList.remove('shifted-up');
             }
