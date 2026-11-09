@@ -58,7 +58,7 @@
     <!-- Preconnect for Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <!-- Fallback for JavaScript Disabled -->
     <noscript>
@@ -81,9 +81,55 @@
             color: #000000;
         }
 
-        #glass-nav {
+        /* ANNOUNCEMENT BAR */
+        #announcement-bar {
             position: fixed;
             top: 0;
+            left: 0;
+            width: 100%;
+            height: 28px;
+            background: #f5f5f7; 
+            color: #4a4a4a; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px; 
+            font-weight: 500; 
+            letter-spacing: 0.5px;
+            z-index: 2000;
+            cursor: pointer;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.05); 
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+
+        #announcement-bar.hidden-bar {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        #announcement-bar .announce-text {
+            animation: pulseText 2.5s infinite;
+        }
+
+        #announcement-bar .highlight-link {
+            text-decoration: underline; 
+            text-underline-offset: 2px; 
+            font-size: 10px; /* Sadece bu kısım daha küçük */
+            margin-left: 2px;
+        }
+
+        @keyframes pulseText {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+
+        #glass-nav {
+            position: fixed;
+            top: 28px; 
             left: 0;
             width: 100%;
             max-width: 100%;
@@ -99,8 +145,12 @@
             justify-content: space-between;
             opacity: 1;
             pointer-events: auto;
-            transition: transform 0.6s ease, opacity 0.4s ease;
+            transition: transform 0.6s ease, opacity 0.4s ease, top 0.4s ease; /* top transition eklendi */
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        #glass-nav.shifted-up {
+            top: 0 !important;
         }
 
         #glass-nav.hidden {
@@ -169,7 +219,7 @@
             transition: left 0.4s ease;
             display: flex;
             flex-direction: column;
-            padding: 80px 20px 20px 30px;
+            padding: 108px 20px 20px 30px; 
             box-shadow: 5px 0 20px rgba(0, 0, 0, 0.3);
             border-right: 1px solid rgba(255, 255, 255, 0.15);
         }
@@ -191,7 +241,7 @@
 
         .close-btn {
             position: absolute;
-            top: 20px;
+            top: 40px; 
             right: 25px;
             font-size: 32px !important;
             cursor: pointer;
@@ -210,7 +260,7 @@
             align-items: center;
             justify-content: center;
             margin-top: 0; 
-            padding-top: 65px;
+            padding-top: 93px; 
         }
 
         .animation-iframe {
@@ -393,7 +443,6 @@
             }
         }
 
-        /* YLEINEN OVERLAY TYYLI - iOS BLUR KORJAUS */
         .popup-overlay {
             position: fixed;
             top: 0;
@@ -429,9 +478,8 @@
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         }
 
-        /* UUDET TYYLIT SPINWHEEL-POPUPILLE (Poistaa valkoisen ala-osan) */
         #spinwheel-popup .popup-content {
-            height: 515px; /* Lyhennetty vähentämään tyhjää tilaa alhaalla / Shortened to reduce empty space at the bottom */
+            height: 515px;
             width: 90%;
             max-width: 350px;
             background: #0f0f14;
@@ -441,7 +489,6 @@
             border-radius: 20px;
         }
 
-        /* UUDET TYYLIT SPINWHEEL X-PAINIKKEELLE (Pienempi koko) */
         #spinwheel-popup .popup-close {
             width: 24px;
             height: 24px;
@@ -450,7 +497,6 @@
             right: 10px;
         }
 
-        /* SPINWHEEL IFRAME - KESKITETTY 100% */
         .spinwheel-iframe {
             width: 100%;
             height: 100%;
@@ -626,9 +672,7 @@
         .status-Done { background: #e0e7ff; color: #4f46e5; }
         .status-Cancelled { background: #fee2e2; color: #dc2626; }
 
-        /* ========================================= */
         /* COMPACT GALLERY CSS */
-        /* ========================================= */
         :root{ --compact-h: 420px; }
         @media (max-width:520px){ :root{ --compact-h: 360px; } }
 
@@ -647,7 +691,6 @@
         }
         .compact-count { font-size:12px; letter-spacing:.18em; color:#9a9a9a; }
 
-        /* --- SLOWER PULSING GREY GLOW CIRCLE CSS --- */
         .pulse-circle-container {
           width: 18px;
           height: 18px;
@@ -802,9 +845,6 @@
         }
         @media (prefers-reduced-motion: reduce){ .compact-main{transition:none} }
 
-        /* ========================================= */
-        /* YENİ ÖDEME YÖNTEMLERİ CSS */
-        /* ========================================= */
         .payment-row {
           display: flex;
           flex-wrap: nowrap; 
@@ -858,6 +898,30 @@
 </head>
 
 <body>
+    <!-- ANNOUNCEMENT BAR -->
+    <div id="announcement-bar" onclick="handleWalkInClick()">
+        <span class="announce-text">30.11 Walk-In Day - <span class="highlight-link">Rekisteröidy ja näe flash-kuvat!</span></span>
+    </div>
+
+    <!-- WALKIN FLASHES POPUP -->
+    <div id="walkin-popup" class="popup-overlay">
+        <div class="popup-content" style="padding: 30px; height: auto; max-height: 85vh; overflow-y: auto;">
+            <span class="popup-close" onclick="document.getElementById('walkin-popup').classList.remove('show')">&times;</span>
+
+            <h3 style="text-align:center; margin-top:0; margin-bottom:20px; font-weight:600;">Walk-In Flashes</h3>
+
+            <div style="display:flex; flex-direction:column; gap:15px; align-items:center;">
+                <!-- Kuvat ladataan Githubin hakemistosta (onerror piilottaa kuvan, jos sitä ei ole olemassa) -->
+                <img src="walkin.png" alt="Walk-In Flash 1" style="width:100%; border-radius:10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" onerror="this.style.display='none'">
+                <img src="walkin2.png" alt="Walk-In Flash 2" style="width:100%; border-radius:10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" onerror="this.style.display='none'">
+                
+                <p style="font-size:13px; text-align:center; margin-bottom:10px;">Voit myös tarkastella kuvia suoraan Google Drivesta:</p>
+                
+                <a href="https://drive.google.com/drive/folders/1RtsRv7OhPWF8JLv1_5sv0rIxBSfLNCLp" target="_blank" class="auth-btn" style="text-decoration:none; text-align:center; margin-top:0;">Avaa Drive-Kansio</a>
+            </div>
+        </div>
+    </div>
+
     <div id="spinwheel-popup" class="popup-overlay">
         <div class="popup-content">
             <span class="popup-close" id="spinwheel-close">&times;</span>
@@ -1060,8 +1124,8 @@
         const AUTH_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzcwVZTxNs4uSKA1RPU14FkDJRn11jqeIut3_q01O6rR1Cdh4cK64wGj6wvPpMke4qJrw/exec";
 
         let currentUser = null;
+        let wantsToSeeFlashes = false; 
 
-        // 1. Ajanvaraus-sivulta tultaessa tarkistetaan URL'deki session parametresi
         const urlParams = new URLSearchParams(window.location.search);
         const sessionParam = urlParams.get('session');
         
@@ -1075,7 +1139,6 @@
             }
         }
 
-        // 2. Eğer URL'de yoksa normal localStorage hafızasından oku
         if (!currentUser) {
             try {
                 const storedUser = localStorage.getItem("inky_user");
@@ -1087,7 +1150,18 @@
             }
         }
 
-        // Sağ üstteki profil ikonunu (Avatar) giriş durumuna göre güncelleyen fonksiyon
+        function handleWalkInClick() {
+            if (currentUser) {
+                document.getElementById('walkin-popup').classList.add('show');
+            } else {
+                wantsToSeeFlashes = true;
+                if (isLogin) {
+                    document.getElementById("auth-toggle-btn").click();
+                }
+                document.getElementById('auth-popup').classList.add('show');
+            }
+        }
+
         function updateHeaderAvatar() {
             const authBtn = document.getElementById("open-auth-bar");
             if (currentUser) {
@@ -1109,7 +1183,6 @@
             }
         }
 
-        // Sayfa açıldığında ikonu hemen güncelle
         updateHeaderAvatar();
         
         function notifyAnimationIframe() {
@@ -1125,7 +1198,6 @@
         }
         window.addEventListener('load', notifyAnimationIframe);
 
-        // Rezervasyon sayfasına giderken oturum bilgisini URL'ye ekleme fonksiyonu
         function goToBooking(e) {
             if (e) e.preventDefault();
             let targetUrl = "https://ajanvaraus.inkyvibestattoo.com/"; 
@@ -1162,6 +1234,21 @@
             bokehOverlay.addEventListener('click', removeIntroBlur, { passive: true, once: true });
         }
         window.addEventListener('scroll', removeIntroBlur, { passive: true, once: true });
+
+        // --- YENİ EKLENEN KOD: SCROLL İLE BAR GİZLEME/GÖSTERME ---
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const announceBar = document.getElementById('announcement-bar');
+            const glassNav = document.getElementById('glass-nav');
+            
+            if (scrollTop > 40) { // 40px aşağı inildiğinde gizle
+                announceBar.classList.add('hidden-bar');
+                glassNav.classList.add('shifted-up');
+            } else { // Yukarı çıkıldığında geri getir
+                announceBar.classList.remove('hidden-bar');
+                glassNav.classList.remove('shifted-up');
+            }
+        }, { passive: true });
 
         document.getElementById("hamburger-btn").addEventListener("click", () => {
             document.getElementById("sidebar").classList.add("open");
@@ -1221,7 +1308,6 @@
         document.getElementById("open-auth-bar").addEventListener("click", (e) => {
             e.preventDefault();
 
-            // Only update currentUser if data is found, otherwise keep the existing session
             try {
                 const storedUser = localStorage.getItem("inky_user");
                 if (storedUser) {
@@ -1364,6 +1450,13 @@
                     );
 
                     authPopup.classList.remove("show");
+                    
+                    if (wantsToSeeFlashes) {
+                        wantsToSeeFlashes = false;
+                        setTimeout(() => {
+                            document.getElementById('walkin-popup').classList.add('show');
+                        }, 500); 
+                    }
                 } else {
                     alert("Virhe: " + data.error);
                 }
@@ -1475,7 +1568,6 @@
             btn.disabled = false;
         }
 
-        // 3D Animasyon ile iletişim kuran mesaj dinleyicisi
         window.addEventListener("message", function(event) {
             let data = event.data;
             let action = typeof data === "string" ? data : data?.action;
