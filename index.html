@@ -449,7 +449,7 @@
             left: 0;
             width: 100%;
             height: 100%; 
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.85); /* Arka plan biraz daha koyulaştırıldı resim öne çıksın diye */
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px); 
             z-index: 4000;
@@ -476,6 +476,30 @@
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        /* --- SADECE FOTOĞRAF İÇİN ÖZEL POPUP STİLİ --- */
+        #walkin-popup .popup-content {
+            padding: 0; 
+            background: transparent; 
+            border: none; 
+            box-shadow: none; 
+            max-width: 450px; 
+            height: auto; 
+            max-height: 90vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            overflow: visible;
+        }
+
+        #walkin-popup .popup-close {
+            top: -40px; 
+            right: 0px; 
+            z-index: 10; 
+            background: rgba(255,255,255,0.9); 
+            color: #000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
         #spinwheel-popup .popup-content {
@@ -903,6 +927,16 @@
         <span class="announce-text">30.11 Walk-In Day - <span id="announce-link" class="highlight-link">Rekisteröidy ja näe flash-kuvat!</span></span>
     </div>
 
+    <!-- WALKIN FLASHES POPUP (DIREKT FOTO GÖRÜNÜMÜ) -->
+    <div id="walkin-popup" class="popup-overlay">
+        <!-- Arkaplan tamamen şeffaf, sadece görsel ve X butonu görünür -->
+        <div class="popup-content">
+            <span class="popup-close" onclick="document.getElementById('walkin-popup').classList.remove('show')">&times;</span>
+            <!-- Drive Linkini doğrudan resim kaynağı (src) olarak çeken sistem -->
+            <img src="https://drive.google.com/uc?export=view&id=1akYDKAJLX0zuSo94WB1VFGBMukL3MCUs" alt="Walk-In Flashes" style="width: 100%; height: auto; border-radius: 12px; object-fit: contain; max-height: 85vh; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        </div>
+    </div>
+
     <div id="spinwheel-popup" class="popup-overlay">
         <div class="popup-content">
             <span class="popup-close" id="spinwheel-close">&times;</span>
@@ -1131,10 +1165,11 @@
             }
         }
 
-        // Tıklanınca doğrudan Drive açılıyor (Giriş yapılıysa)
+        // --- YENİ TIKLAMA FONKSİYONU ---
+        // Giriş yapılmışsa pop-up içinde sadece resmi açar
         function handleWalkInClick() {
             if (currentUser) {
-                window.open("https://drive.google.com/file/d/1akYDKAJLX0zuSo94WB1VFGBMukL3MCUs/view?usp=drivesdk", "_blank");
+                document.getElementById('walkin-popup').classList.add('show');
             } else {
                 wantsToSeeFlashes = true;
                 if (isLogin) {
@@ -1159,7 +1194,7 @@
                     </svg>
                 `;
                 
-                // Kullanıcı giriş yaptıysa yazıyı kısalt
+                // Kullanıcı giriş yaptıysa yazıyı değiştir
                 if(announceLink) {
                     announceLink.innerText = "Näe flash-kuvat";
                 }
@@ -1447,11 +1482,12 @@
 
                     authPopup.classList.remove("show");
                     
-                    // --- GİRİŞ BAŞARILIYSA DOĞRUDAN DRIVE LİNKİNE YÖNLENDİR ---
+                    // --- GİRİŞ BAŞARILIYSA POPUP AÇILIR ---
                     if (wantsToSeeFlashes) {
                         wantsToSeeFlashes = false;
-                        // Popup engelleyicilere takılmamak için doğrudan mevcut sayfayı Drive'a yönlendiriyoruz.
-                        window.location.href = "https://drive.google.com/file/d/1akYDKAJLX0zuSo94WB1VFGBMukL3MCUs/view?usp=drivesdk";
+                        setTimeout(() => {
+                            document.getElementById('walkin-popup').classList.add('show');
+                        }, 500); 
                     }
                 } else {
                     alert("Virhe: " + data.error);
