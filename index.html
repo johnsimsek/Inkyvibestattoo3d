@@ -212,7 +212,8 @@
             left: -100%;
             width: 270px;
             height: 100vh;
-            background: linear-gradient(150deg, rgba(15, 15, 20, 0.55) 0%, rgba(234, 67, 53, 0.12) 30%, rgba(161, 66, 244, 0.15) 65%, rgba(26, 115, 232, 0.15) 100%);
+            /* Darker liquid glass background */
+            background: linear-gradient(150deg, rgba(10, 10, 15, 0.88) 0%, rgba(234, 67, 53, 0.10) 30%, rgba(161, 66, 244, 0.12) 65%, rgba(26, 115, 232, 0.12) 100%);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
             z-index: 3500;
@@ -220,8 +221,8 @@
             display: flex;
             flex-direction: column;
             padding: 108px 20px 20px 30px; 
-            box-shadow: 5px 0 20px rgba(0, 0, 0, 0.3);
-            border-right: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 5px 0 20px rgba(0, 0, 0, 0.5);
+            border-right: 1px solid rgba(255, 255, 255, 0.10);
         }
 
         #sidebar.open { left: 0; }
@@ -962,7 +963,11 @@
                     <input type="text" id="auth-name" placeholder="Koko Nimi" class="auth-input signup-field" style="display: none;">
                     <input type="tel" id="auth-phone" placeholder="Puhelinnumero" value="+358" class="auth-input signup-field" style="display: none;">
                     <input type="email" id="auth-email" placeholder="Sähköpostiosoite" class="auth-input" required>
-                    <input type="password" id="auth-pass" placeholder="Salasana" class="auth-input" required>
+                    
+                    <div style="position: relative; margin-bottom: 15px;">
+                        <input type="password" id="auth-pass" placeholder="Salasana" class="auth-input" style="margin-bottom: 0; padding-right: 45px;" required>
+                        <span id="toggle-password" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 16px; color: #333; user-select: none;">👁️</span>
+                    </div>
 
                     <div style="text-align:right; margin-top:-10px; margin-bottom:15px; font-size:11px;">
                         <a href="#" onclick="resetPassword(event)" style="color:#666; text-decoration:none;">Unohditko salasanasi?</a>
@@ -1133,7 +1138,6 @@
       </div>
     </div>
 
-    <!-- KIRJAUTUMISEN SYNKRONOINTI 3D-ANIMAATIOON JA RESERVATIOON -->
     <script>
         document.body.classList.add('js-enabled');
 
@@ -1166,8 +1170,6 @@
             }
         }
 
-        // --- YENİ TIKLAMA FONKSİYONU ---
-        // Giriş yapılmışsa pop-up içinde Github'dan çekilen resim açılır
         function handleWalkInClick() {
             if (currentUser) {
                 document.getElementById('walkin-popup').classList.add('show');
@@ -1182,10 +1184,9 @@
 
         function updateHeaderAvatar() {
             const authBtn = document.getElementById("open-auth-bar");
-            const announceLink = document.getElementById("announce-link"); // Dinamik duyuru yazısı için
+            const announceLink = document.getElementById("announce-link"); 
 
             if (currentUser) {
-                // Login olunmuşsa
                 const firstName = currentUser.name ? currentUser.name.split(' ')[0] : 'Profiili';
                 authBtn.innerHTML = `
                     <span style="color: #ffffff; font-size: 13px; font-weight: 600; margin-right: 6px; letter-spacing: 0.5px; text-decoration: none; border: none;">${firstName}</span>
@@ -1194,24 +1195,15 @@
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
                 `;
-                
-                // Kullanıcı giriş yaptıysa yazıyı değiştir
-                if(announceLink) {
-                    announceLink.innerText = "Näe flash-kuvat";
-                }
+                if(announceLink) announceLink.innerText = "Näe flash-kuvat";
             } else {
-                // Login olunmamışsa
                 authBtn.innerHTML = `
                     <svg class="header-icon" viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
                 `;
-                
-                // Login değilse varsayılan metin
-                if(announceLink) {
-                    announceLink.innerText = "Rekisteröidy ja näe flash-kuvat!";
-                }
+                if(announceLink) announceLink.innerText = "Rekisteröidy ja näe flash-kuvat!";
             }
         }
 
@@ -1236,23 +1228,19 @@
             
             try {
                 const freshUser = localStorage.getItem("inky_user");
-                if (freshUser) {
-                    currentUser = JSON.parse(freshUser);
-                }
+                if (freshUser) currentUser = JSON.parse(freshUser);
             } catch(err) {}
 
             if (currentUser) {
                 const encodedUser = encodeURIComponent(JSON.stringify(currentUser));
                 targetUrl += "?session=" + encodedUser;
             }
-            
             window.location.href = targetUrl;
         }
 
         function removeIntroBlur() {
             if (!document.body.classList.contains('is-scrolled')) {
                 document.body.classList.add('is-scrolled');
-                
                 setTimeout(() => {
                     const overlay = document.getElementById('bokeh-overlay');
                     if (overlay) overlay.style.display = 'none';
@@ -1267,7 +1255,6 @@
         }
         window.addEventListener('scroll', removeIntroBlur, { passive: true, once: true });
 
-        // --- SCROLL İLE BAR GİZLEME/GÖSTERME ---
         window.addEventListener('scroll', () => {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             const announceBar = document.getElementById('announcement-bar');
@@ -1303,7 +1290,6 @@
                     localStorage.setItem("spinwheel_last_shown", now);
                 }
             } catch (e) {
-                console.warn("Spinwheel tallennusvirhe:", e);
                 spinwheelPopup.classList.add("show");
             }
         }
@@ -1312,7 +1298,6 @@
             if (!interactionDetected) {
                 interactionDetected = true;
                 setTimeout(showPopup, 30000);
-
                 ["scroll", "click", "touchstart", "mousemove"].forEach(evt => {
                     window.removeEventListener(evt, handleInteraction);
                 });
@@ -1332,8 +1317,18 @@
         const authPhone = document.getElementById("auth-phone");
 
         authPhone.addEventListener("input", function() {
-            if (!this.value.startsWith("+358")) {
-                this.value = "+358";
+            if (!this.value.startsWith("+358")) this.value = "+358";
+        });
+
+        // Toggle password visibility function
+        document.getElementById("toggle-password").addEventListener("click", function() {
+            const passInput = document.getElementById("auth-pass");
+            if (passInput.type === "password") {
+                passInput.type = "text";
+                this.textContent = "🙈"; 
+            } else {
+                passInput.type = "password";
+                this.textContent = "👁️";
             }
         });
 
@@ -1342,26 +1337,18 @@
 
             try {
                 const storedUser = localStorage.getItem("inky_user");
-                if (storedUser) {
-                    currentUser = JSON.parse(storedUser);
-                }
-            } catch (e) {
-                console.warn("Virhe luettaessa localStoragea:", e);
-            }
+                if (storedUser) currentUser = JSON.parse(storedUser);
+            } catch (e) {}
 
             if (currentUser) {
                 let p = String(currentUser.phone || "");
-
-                if (p && !p.startsWith("+")) {
-                    p = "+" + p;
-                }
+                if (p && !p.startsWith("+")) p = "+" + p;
 
                 document.getElementById("profile-info").innerHTML = `
                     <strong>Koko Nimi:</strong> ${currentUser.name}<br>
                     <strong>Sähköpostiosoite:</strong> ${currentUser.email}<br>
                     <strong>Puhelinnumero:</strong> ${p || "-"}
                 `;
-
                 profilePopup.classList.add("show");
             } else {
                 authPopup.classList.add("show");
@@ -1373,11 +1360,7 @@
         });
 
         function logout() {
-            try {
-                localStorage.removeItem("inky_user");
-            } catch (e) {
-                console.warn("Uloskirjautumisvirhe:", e);
-            }
+            try { localStorage.removeItem("inky_user"); } catch (e) {}
             currentUser = null;
             updateHeaderAvatar();
             notifyAnimationIframe();
@@ -1425,6 +1408,16 @@
             const btn = document.getElementById("auth-submit-btn");
             const originalText = btn.innerText;
 
+            // Extra manual check for signup: phone number MUST be entered correctly
+            if (!isLogin) {
+                const phoneVal = document.getElementById("auth-phone").value.trim();
+                // If it's just +358 or very short, reject it
+                if (phoneVal === "" || phoneVal === "+358" || phoneVal.length < 7) {
+                    alert("Syötä voimassa oleva puhelinnumero."); // Please enter a valid phone number
+                    return;
+                }
+            }
+
             btn.disabled = true;
             btn.innerText = "Odottaa...";
 
@@ -1460,16 +1453,10 @@
                                 body: spinWheelFormData,
                                 mode: 'no-cors'
                             });
-                        } catch (err) {
-                            console.warn("Spin Wheel tallennusvirhe taustalla:", err);
-                        }
+                        } catch (err) {}
                     }
                 
-                    try {
-                        localStorage.setItem("inky_user", JSON.stringify(data.user));
-                    } catch (storeErr) {
-                        console.warn("Tietojen tallennus epäonnistui:", storeErr);
-                    }
+                    try { localStorage.setItem("inky_user", JSON.stringify(data.user)); } catch (storeErr) {}
                     
                     currentUser = data.user;
                     updateHeaderAvatar();
@@ -1483,7 +1470,6 @@
 
                     authPopup.classList.remove("show");
                     
-                    // --- GİRİŞ BAŞARILIYSA POPUP AÇILIR ---
                     if (wantsToSeeFlashes) {
                         wantsToSeeFlashes = false;
                         setTimeout(() => {
@@ -1505,7 +1491,6 @@
             if (!currentUser) return;
 
             document.getElementById("bookingsModal").classList.add("show");
-
             const list = document.getElementById("bookingsList");
             list.innerHTML = "<p>Ladataan...</p>";
 
@@ -1514,9 +1499,7 @@
                     method: "POST",
                     body: JSON.stringify({
                         action: "getMyBookings",
-                        payload: {
-                            customerId: currentUser.id
-                        }
+                        payload: { customerId: currentUser.id }
                     })
                 });
 
@@ -1537,7 +1520,6 @@
                                 }
                                 return str;
                             };
-
                             const typeText = (b.type === "Tattoo" || b.type === "tattoo") ? "Tatuointi Aika" : "Tatuointi Suunnittelu Aika";
 
                             return `
@@ -1561,7 +1543,6 @@
 
         async function resetPassword(e) {
             e.preventDefault();
-
             const emailInput = document.getElementById("auth-email").value.trim();
 
             if (!emailInput) {
@@ -1580,14 +1561,11 @@
                     method: "POST",
                     body: JSON.stringify({
                         action: "resetPassword",
-                        payload: {
-                            email: emailInput
-                        }
+                        payload: { email: emailInput }
                     })
                 });
 
                 const data = await res.json();
-
                 if (data.ok) {
                     alert("Uusi salasana on generoitu! Tarkista sähköpostisi (myös roskapostikansio).");
                 } else {
@@ -1596,7 +1574,6 @@
             } catch (err) {
                 alert("Yhteysvirhe. Yritä uudelleen.");
             }
-
             btn.innerText = originalText;
             btn.disabled = false;
         }
@@ -1605,12 +1582,8 @@
             let data = event.data;
             let action = typeof data === "string" ? data : data?.action;
 
-            if (action === "goToBooking" || action === "openBooking") {
-                goToBooking();
-            }
-            else if (action === "checkLoginState") {
-                notifyAnimationIframe();
-            }
+            if (action === "goToBooking" || action === "openBooking") goToBooking();
+            else if (action === "checkLoginState") notifyAnimationIframe();
             else if (action === "loginSuccess" && data.user) {
                 currentUser = data.user;
                 localStorage.setItem("inky_user", JSON.stringify(currentUser));
@@ -1644,7 +1617,6 @@
         const main  = document.getElementById('compact-main');
         const count = document.getElementById('compact-count');
         const thumbs= document.getElementById('compact-thumbs');
-
         const lb = document.getElementById('compact-lb');
         const lbStage = document.getElementById('compact-lbStage');
         const lbImg = document.getElementById('compact-lbImg');
@@ -1656,10 +1628,7 @@
 
         function pad2(n){ return String(n).padStart(2, "0"); }
         function fileFor(i){ return `${pad2(i)}.${CONFIG.ext}`; }
-
-        function setBg(el, varName, src){
-          el.style.setProperty(varName, `url("${src}")`);
-        }
+        function setBg(el, varName, src){ el.style.setProperty(varName, `url("${src}")`); }
 
         function stopSlideshow(){
           if (slideTimer) clearInterval(slideTimer);
@@ -1755,7 +1724,6 @@
         }
 
         main.onclick = openLightbox;
-
         lbClose.onclick = closeLightbox;
         lbPrev.onclick = ()=>{ prev(); startSlideshow(); };
         lbNext.onclick = ()=>{ next(); startSlideshow(); };
@@ -1796,17 +1764,14 @@
           return new Promise((resolve)=>{
             const img = new Image();
             const timer = setTimeout(()=>finish(false), CONFIG.imageTimeoutMs);
-
             function finish(ok){
               clearTimeout(timer);
               img.onload = null;
               img.onerror = null;
               resolve(ok);
             }
-
             img.onload = ()=>finish(true);
             img.onerror = ()=>finish(false);
-
             const bust = `cb=${Date.now()}_${Math.random().toString(16).slice(2)}`;
             img.src = url.includes("?") ? `${url}&${bust}` : `${url}?${bust}`;
           });
@@ -1833,7 +1798,6 @@
 
             IMAGES.push(f);
             nextIndex++;
-
             buildThumbs();
             render();
           }
@@ -1857,11 +1821,9 @@
           buildThumbs();
           idx = 0;
           render();
-
           setInterval(watchForNewImages, CONFIG.watchIntervalMs);
           setInterval(reconcileDeletionsFromEnd, CONFIG.reconcileIntervalMs);
         }
-
         init();
       })();
     </script>
