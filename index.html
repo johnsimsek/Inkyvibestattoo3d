@@ -212,7 +212,6 @@
             left: -100%;
             width: 270px;
             height: 100vh;
-            /* MUUTETTU: Koyu ama eskisinden biraz daha aydınlık, zarif bir cam efekti */
             background: linear-gradient(150deg, rgba(20, 20, 25, 0.85) 0%, rgba(25, 25, 30, 0.82) 50%, rgba(15, 15, 20, 0.88) 100%);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
@@ -230,7 +229,7 @@
         #sidebar a {
             text-decoration: none;
             color: #ffffff;
-            font-size: 14px; /* TÄHÄN MUUTETTU FONTIN KOKO (oli 16px) */
+            font-size: 14px;
             font-weight: 400;
             margin-bottom: 25px;
             letter-spacing: 1px;
@@ -573,7 +572,6 @@
             margin-bottom: 15px;
         }
 
-        /* YENİ: Input Wrapper ve Required Star stilleri */
         .input-wrapper {
             position: relative;
             margin-bottom: 15px;
@@ -581,7 +579,7 @@
 
         .input-wrapper .auth-input {
             margin-bottom: 0;
-            padding-right: 35px; /* Yıldız için boşluk */
+            padding-right: 35px; 
         }
 
         .req-star {
@@ -589,11 +587,11 @@
             right: 15px;
             top: 50%;
             transform: translateY(-50%);
-            color: #ef4444; /* Kırmızı renk */
+            color: #ef4444; 
             font-size: 20px;
             font-family: Arial, sans-serif;
             font-weight: bold;
-            pointer-events: none; /* Tıklamayı engelle */
+            pointer-events: none; 
             line-height: 1;
         }
 
@@ -982,26 +980,27 @@
 
                 <form id="auth-form">
                     
-                    <!-- YENİ: Name alanı required class ile -->
+                    <!-- DÜZELTME: name ve autocomplete özellikleri eklendi -->
                     <div class="input-wrapper signup-wrapper" style="display: none;">
-                        <input type="text" id="auth-name" placeholder="Koko Nimi" class="auth-input">
+                        <input type="text" id="auth-name" name="name" autocomplete="name" placeholder="Koko Nimi" class="auth-input">
                         <span class="req-star">*</span>
                     </div>
 
-                    <!-- YENİ: Phone alanı required class ile -->
+                    <!-- DÜZELTME: name ve autocomplete özellikleri eklendi -->
                     <div class="input-wrapper signup-wrapper" style="display: none;">
-                        <input type="tel" id="auth-phone" placeholder="Puhelinnumero" value="+358" class="auth-input">
+                        <input type="tel" id="auth-phone" name="phone" autocomplete="tel" placeholder="Puhelinnumero" value="+358" class="auth-input">
                         <span class="req-star">*</span>
                     </div>
                     
+                    <!-- DÜZELTME: name ve autocomplete özellikleri eklendi -->
                     <div class="input-wrapper">
-                        <input type="email" id="auth-email" placeholder="Sähköpostiosoite" class="auth-input" required>
+                        <input type="email" id="auth-email" name="email" autocomplete="email" placeholder="Sähköpostiosoite" class="auth-input" required>
                         <span class="req-star">*</span>
                     </div>
                     
+                    <!-- DÜZELTME: name ve autocomplete özellikleri eklendi -->
                     <div class="input-wrapper">
-                        <!-- Password alanı için padding-right değerini daha büyük tuttuk ki yıldız ve göz ikonu sığsın -->
-                        <input type="password" id="auth-pass" placeholder="Salasana" class="auth-input" style="padding-right: 55px;" required>
+                        <input type="password" id="auth-pass" name="password" autocomplete="current-password" placeholder="Salasana" class="auth-input" style="padding-right: 55px;" required>
                         <span class="req-star" style="right: 40px;">*</span>
                         <span id="toggle-password" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #666; display: flex; align-items: center; justify-content: center; height: 100%; user-select: none;">
                             <!-- Eye Open SVG -->
@@ -1361,7 +1360,6 @@
         const profilePopup = document.getElementById("profile-popup");
         const authPhone = document.getElementById("auth-phone");
 
-        // Native Browser validation for the phone number
         authPhone.addEventListener("input", function() {
             if (!this.value.startsWith("+358")) {
                 this.value = "+358";
@@ -1375,7 +1373,6 @@
             }
         });
 
-        // Toggle Password Eye logic
         document.getElementById("toggle-password").addEventListener("click", function() {
             const passInput = document.getElementById("auth-pass");
             const eyeOpen = document.getElementById("eye-icon-open");
@@ -1448,7 +1445,10 @@
 
                 signupWrappers.forEach(wrapper => {
                     wrapper.style.display = "none";
-                    wrapper.querySelector("input").required = false;
+                    const input = wrapper.querySelector("input");
+                    input.required = false;
+                    // DÜZELTME: Giriş sayfasına geçince gizli alanların hata vermesini engelle
+                    input.setCustomValidity(""); 
                 });
             } else {
                 document.getElementById("auth-title").innerText = "Luo tili";
@@ -1474,7 +1474,6 @@
         document.getElementById("auth-form").addEventListener("submit", async (e) => {
             e.preventDefault();
 
-            // Kayıt (Signup) sırasında ekstra kontrol
             if (!isLogin) {
                 const nameVal = document.getElementById("auth-name").value.trim();
                 const phoneVal = document.getElementById("auth-phone").value.trim();
