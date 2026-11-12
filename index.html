@@ -1386,7 +1386,7 @@
         function handleInteraction() {
             if (!interactionDetected) {
                 interactionDetected = true;
-                setTimeout(showPopup, 30000);
+                setTimeout(showPopup, 60000); // TÄMÄ ON MUUTETTU 30000 -> 60000
                 ["scroll", "click", "touchstart", "mousemove"].forEach(evt => {
                     window.removeEventListener(evt, handleInteraction);
                 });
