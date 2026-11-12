@@ -189,7 +189,7 @@
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 0;
-            padding: 16px 24px;
+            padding: 4px 24px; /* <--- PADDING REDUCED TO 4PX TO MAKE IT EXTREMELY THIN */
             z-index: 1000;
             display: flex;
             align-items: center;
@@ -1119,7 +1119,9 @@
                 <span></span>
             </button>
             <h1 class="menu-text">
-                <a href="https://www.inkyvibestattoo.com/" style="text-decoration: none; color: inherit; cursor: pointer;">INKY VIBES TATTOO</a>
+                <a href="https://www.inkyvibestattoo.com/" style="text-decoration: none; color: inherit; cursor: pointer; display: flex; align-items: center;">
+                    <img src="sidebartext.jpeg" alt="Inky Vibes Tattoo" style="height: 42px; width: auto; margin-top: 2px; opacity: 0.95; filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.4));">
+                </a>
             </h1>
         </div>
         
@@ -1142,9 +1144,6 @@
         </section>
 
         <section id="gallery-section">
-            <div class="gallery-header">
-                <img src="https://johnsimsek.github.io/Inkyvibes-tattoo-lettering/IMG_2383.JPEG" alt="Inky Vibes Tattoo logo">
-            </div>
 
             <!-- COMPACT GALLERY -->
             <div class="compact-wrap">
