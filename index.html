@@ -280,13 +280,14 @@
         #sidebar a {
             text-decoration: none;
             color: #ffffff;
-            font-size: 14px;
+            font-size: 12px; /* MUUTETTU PIENEMMÄKSI */
             font-weight: 400;
             margin-bottom: 25px;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             transition: color 0.3s;
             line-height: 1.4;
             text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            white-space: nowrap; /* PAKOTTAA TEKSTIN YHDELLE RIVILLE */
         }
 
         #sidebar a:hover { color: #cccccc; }
@@ -1385,7 +1386,7 @@
         function handleInteraction() {
             if (!interactionDetected) {
                 interactionDetected = true;
-                setTimeout(showPopup, 60000); // TÄMÄ ON MUUTETTU 30000 -> 60000
+                setTimeout(showPopup, 45000); // TÄMÄ ON MUUTETTU 60000 -> 45000
                 ["scroll", "click", "touchstart", "mousemove"].forEach(evt => {
                     window.removeEventListener(evt, handleInteraction);
                 });
