@@ -189,7 +189,7 @@
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 0;
-            padding: 4px 24px; /* <--- PADDING REDUCED TO 4PX TO MAKE IT EXTREMELY THIN */
+            padding: 4px 24px;
             z-index: 1000;
             display: flex;
             align-items: center;
@@ -280,14 +280,14 @@
         #sidebar a {
             text-decoration: none;
             color: #ffffff;
-            font-size: 12px; /* MUUTETTU PIENEMMÄKSI */
+            font-size: 12px;
             font-weight: 400;
             margin-bottom: 25px;
             letter-spacing: 0.5px;
             transition: color 0.3s;
             line-height: 1.4;
             text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-            white-space: nowrap; /* PAKOTTAA TEKSTIN YHDELLE RIVILLE */
+            white-space: nowrap;
         }
 
         #sidebar a:hover { color: #cccccc; }
@@ -782,13 +782,6 @@
           height:44px; display:flex; align-items:center; justify-content:space-between;
           padding:0 14px; border-bottom:1px solid rgba(255,255,255,.06);
         }
-        .compact-top-right {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          margin-left: auto;
-        }
-        .compact-count { font-size:12px; letter-spacing:.18em; color:#9a9a9a; }
 
         .pulse-circle-container {
           width: 18px;
@@ -931,17 +924,6 @@
         .compact-lbPrev { left:calc(14px + env(safe-area-inset-left)); }
         .compact-lbNext { right:calc(14px + env(safe-area-inset-right)); }
 
-        .compact-lbCount {
-          position:absolute; z-index:3;
-          bottom:calc(16px + env(safe-area-inset-bottom));
-          left:50%; transform:translateX(-50%);
-          font-size:12px; letter-spacing:.18em;
-          color:#d6d6d6; font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;
-          padding:8px 12px; border-radius:999px;
-          border:1px solid rgba(255,255,255,.16);
-          background:rgba(0,0,0,.35);
-          backdrop-filter: blur(10px);
-        }
         @media (prefers-reduced-motion: reduce){ .compact-main{transition:none} }
 
         .payment-row {
@@ -1153,9 +1135,6 @@
                   <div class="pulse-circle-container">
                     <div class="pulse-circle"></div>
                   </div>
-                  <div class="compact-top-right">
-                    <div class="compact-count" id="compact-count">—</div>
-                  </div>
                 </div>
 
                 <div class="compact-stage" id="compact-stage">
@@ -1226,7 +1205,6 @@
         <button class="compact-lbBtn compact-lbPlay" id="compact-lbPlay" aria-label="Slayt">⏸</button>
         <button class="compact-lbBtn compact-lbNav compact-lbPrev" id="compact-lbPrev" aria-label="Önceki">‹</button>
         <button class="compact-lbBtn compact-lbNav compact-lbNext" id="compact-lbNext" aria-label="Sonraki">›</button>
-        <div class="compact-lbCount" id="compact-lbCount">—</div>
       </div>
     </div>
 
@@ -1386,7 +1364,7 @@
         function handleInteraction() {
             if (!interactionDetected) {
                 interactionDetected = true;
-                setTimeout(showPopup, 45000); // TÄMÄ ON MUUTETTU 60000 -> 45000
+                setTimeout(showPopup, 40000);
                 ["scroll", "click", "touchstart", "mousemove"].forEach(evt => {
                     window.removeEventListener(evt, handleInteraction);
                 });
@@ -1733,7 +1711,6 @@
 
         const stage = document.getElementById('compact-stage');
         const main  = document.getElementById('compact-main');
-        const count = document.getElementById('compact-count');
         const thumbs= document.getElementById('compact-thumbs');
         const lb = document.getElementById('compact-lb');
         const lbStage = document.getElementById('compact-lbStage');
@@ -1742,7 +1719,6 @@
         const lbPrev = document.getElementById('compact-lbPrev');
         const lbNext = document.getElementById('compact-lbNext');
         const lbPlay = document.getElementById('compact-lbPlay');
-        const lbCount = document.getElementById('compact-lbCount');
 
         function pad2(n){ return String(n).padStart(2, "0"); }
         function fileFor(i){ return `${pad2(i)}.${CONFIG.ext}`; }
@@ -1784,7 +1760,6 @@
 
         function render(){
           if (IMAGES.length === 0){
-            count.textContent = "0 / 0";
             main.classList.remove('show');
             main.removeAttribute("src");
             stage.style.setProperty('--bg', 'none');
@@ -1796,7 +1771,6 @@
 
           const src = IMAGES[idx];
           setBg(stage, '--bg', src);
-          count.textContent = `${idx+1} / ${IMAGES.length}`;
 
           document.querySelectorAll('.compact-thumb').forEach((t,i)=>{
             t.classList.toggle('active', i===idx);
@@ -1808,7 +1782,6 @@
           if (lb.classList.contains('show')){
             setBg(lbStage, '--lbbg', src);
             lbImg.src = src;
-            lbCount.textContent = `${idx+1} / ${IMAGES.length}`;
           }
         }
 
@@ -1828,7 +1801,6 @@
 
           setBg(lbStage, '--lbbg', src);
           lbImg.src = src;
-          lbCount.textContent = `${idx+1} / ${IMAGES.length}`;
 
           startSlideshow();
         }
