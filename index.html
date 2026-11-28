@@ -109,7 +109,7 @@
     <!-- Preconnect for Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Fallback for JavaScript Disabled -->
     <noscript>
@@ -236,6 +236,45 @@
             padding: 0;
             line-height: normal;
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .ink-drops-trigger {
+            display: inline-flex;
+            align-items: center;
+            gap: 2.5px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 7.5px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            line-height: 1;
+            padding: 2px 6px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+
+        .ink-drops-trigger:hover {
+            background: rgba(255, 255, 255, 0.24);
+            transform: scale(1.04);
+        }
+
+        .ink-drops-trigger svg {
+            width: 9px;
+            height: 9px;
+            stroke: #e5e7eb;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
 
         .header-icon {
@@ -494,6 +533,25 @@
                 max-width: 200px;
                 margin-top: -5px;
             }
+
+            #glass-nav {
+                padding: 4px 14px;
+            }
+
+            .header-actions {
+                gap: 8px;
+            }
+
+            .ink-drops-trigger {
+                font-size: 7px;
+                padding: 1.5px 5px;
+                gap: 2px;
+            }
+
+            .ink-drops-trigger svg {
+                width: 8px;
+                height: 8px;
+            }
         }
 
         .popup-overlay {
@@ -529,6 +587,155 @@
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        /* INKY DROPS MODAL */
+        #inkdrops-popup .popup-content {
+            background: #141416;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            max-width: 440px;
+            max-height: 88vh;
+            overflow-y: auto;
+            padding: 26px 20px 24px 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.75);
+        }
+
+        #inkdrops-popup .popup-close {
+            background: rgba(255, 255, 255, 0.14);
+            color: #ffffff;
+            top: 14px;
+            right: 14px;
+            width: 32px;
+            height: 32px;
+            font-size: 20px;
+        }
+
+        .inkdrops-subtitle {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #e5e7eb, #9ca3af, #f3f4f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 6px;
+        }
+
+        .inkdrops-title {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .inkdrops-lead {
+            font-size: 13px;
+            font-weight: 600;
+            color: #f3f4f6;
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .inkdrops-desc {
+            font-size: 12px;
+            font-weight: 400;
+            color: #9ca3af;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .inkdrops-cta-label {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #f3f4f6, #9ca3af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 16px;
+        }
+
+        .inkdrops-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .inkdrop-card {
+            background: #1c1c1f;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .inkdrop-img-box {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .inkdrop-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .inkdrop-info {
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .inkdrop-size {
+            font-size: 11px;
+            color: #9ca3af;
+            margin-bottom: 6px;
+        }
+
+        .inkdrop-price {
+            font-size: 16px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #f9fafb 0%, #9ca3af 50%, #e5e7eb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .inkdrop-book-btn {
+            margin-top: auto;
+            width: 100%;
+            padding: 9px 10px;
+            background: #000000;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.15s ease, border-color 0.2s ease;
+        }
+
+        .inkdrop-book-btn:hover {
+            background: #111111;
+            border-color: #d1d5db;
+        }
+
+        .inkdrop-book-btn:active {
+            transform: scale(0.97);
         }
 
         #walkin-popup .popup-content {
@@ -981,7 +1188,24 @@
 <body>
     <!-- ANNOUNCEMENT BAR -->
     <div id="announcement-bar" onclick="handleWalkInClick()">
-        <span class="announce-text">Walk-In Day - <span id="announce-link" class="highlight-link">Näe flash-kuvat ✨ </span></span>
+        <span class="announce-text">Walk-In Day - <span id="announce-link" class="highlight-link">Näe flash-kuvat ⟡ </span></span>
+    </div>
+
+    <!-- INKY DROPS POPUP -->
+    <div id="inkdrops-popup" class="popup-overlay">
+        <div class="popup-content">
+            <span class="popup-close" onclick="document.getElementById('inkdrops-popup').classList.remove('show')">&times;</span>
+            
+            <div class="inkdrops-subtitle">INKY VIBES TATTOO </div>
+            <h3 class="inkdrops-title">Inky Drops</h3>
+            <p class="inkdrops-lead">Kuukauden tatuoinnit erikoishintaan.</p>
+            <p class="inkdrops-desc">Artistin valitsemia tatuointimalleja erikoishintaan. Uusia malleja joka kuukausi.</p>
+            <span class="inkdrops-cta-label">Tutustu malleihin</span>
+
+            <div class="inkdrops-grid" id="inkdrops-grid">
+                <p style="grid-column: 1 / -1; text-align: center; color: #9ca3af; font-size: 12px; padding: 20px 0;">Ladataan malleja...</p>
+            </div>
+        </div>
     </div>
 
     <!-- WALKIN FLASHES POPUP -->
@@ -1108,12 +1332,21 @@
             </h1>
         </div>
         
-        <a href="#" id="open-auth-bar" title="Profiili" aria-label="Käyttäjäprofiili" style="display: flex; align-items: center; gap: 4px; text-decoration: none; border: none; outline: none;">
-            <svg class="header-icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-            </svg>
-        </a>
+        <div class="header-actions">
+            <a href="#" id="open-inkdrops-bar" class="ink-drops-trigger" title="Inky Drops" aria-label="Inky Drops" onclick="handleInkDropsClick(event)">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
+                </svg>
+                <span>Inky Drops</span>
+            </a>
+
+            <a href="#" id="open-auth-bar" title="Profiili" aria-label="Käyttäjäprofiili" style="display: flex; align-items: center; gap: 4px; text-decoration: none; border: none; outline: none;">
+                <svg class="header-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </a>
+        </div>
     </header>
 
     <main>
@@ -1214,7 +1447,7 @@
         const AUTH_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzcwVZTxNs4uSKA1RPU14FkDJRn11jqeIut3_q01O6rR1Cdh4cK64wGj6wvPpMke4qJrw/exec";
 
         let currentUser = null;
-        let wantsToSeeFlashes = false; 
+        let wantsToSeeInkDrops = false;
 
         const urlParams = new URLSearchParams(window.location.search);
         const sessionParam = urlParams.get('session');
@@ -1238,11 +1471,19 @@
             } catch (e) {}
         }
 
+        // Walk-In Day flashes are visible to everyone
         function handleWalkInClick() {
+            document.getElementById('walkin-popup').classList.add('show');
+        }
+
+        // Inky Drops is visible only to logged-in/registered users
+        function handleInkDropsClick(e) {
+            if (e) e.preventDefault();
             if (currentUser) {
-                document.getElementById('walkin-popup').classList.add('show');
+                document.getElementById('inkdrops-popup').classList.add('show');
+                if (window.loadInkDrops) window.loadInkDrops();
             } else {
-                wantsToSeeFlashes = true;
+                wantsToSeeInkDrops = true;
                 if (isLogin) {
                     document.getElementById("auth-toggle-btn").click();
                 }
@@ -1252,7 +1493,6 @@
 
         function updateHeaderAvatar() {
             const authBtn = document.getElementById("open-auth-bar");
-            const announceLink = document.getElementById("announce-link"); 
 
             if (currentUser) {
                 const firstName = currentUser.name ? currentUser.name.split(' ')[0] : 'Profiili';
@@ -1263,7 +1503,6 @@
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
                 `;
-                if(announceLink) announceLink.innerText = "Näe flash-kuvat";
             } else {
                 authBtn.innerHTML = `
                     <svg class="header-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -1271,7 +1510,6 @@
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
                 `;
-                if(announceLink) announceLink.innerText = "Näe flash-kuvat ✧ ";
             }
         }
 
@@ -1345,6 +1583,15 @@
             document.getElementById("sidebar").classList.remove("open");
         });
 
+        // Close popups when clicking outside modal content
+        document.getElementById("inkdrops-popup").addEventListener("click", function(e) {
+            if (e.target === this) this.classList.remove("show");
+        });
+
+        document.getElementById("walkin-popup").addEventListener("click", function(e) {
+            if (e.target === this) this.classList.remove("show");
+        });
+
         const spinwheelPopup = document.getElementById("spinwheel-popup");
         let interactionDetected = false;
 
@@ -1414,6 +1661,7 @@
 
         document.getElementById("open-auth-bar").addEventListener("click", (e) => {
             e.preventDefault();
+            wantsToSeeInkDrops = false;
 
             try {
                 const storedUser = localStorage.getItem("inky_user");
@@ -1437,6 +1685,7 @@
 
         document.getElementById("auth-close").addEventListener("click", () => {
             authPopup.classList.remove("show");
+            wantsToSeeInkDrops = false;
         });
 
         function logout() {
@@ -1445,6 +1694,7 @@
             updateHeaderAvatar();
             notifyAnimationIframe();
             profilePopup.classList.remove("show");
+            document.getElementById('inkdrops-popup').classList.remove('show');
             alert("Olet kirjautunut ulos.");
         }
 
@@ -1566,11 +1816,12 @@
 
                     authPopup.classList.remove("show");
                     
-                    if (wantsToSeeFlashes) {
-                        wantsToSeeFlashes = false;
+                    if (wantsToSeeInkDrops) {
+                        wantsToSeeInkDrops = false;
                         setTimeout(() => {
-                            document.getElementById('walkin-popup').classList.add('show');
-                        }, 500); 
+                            document.getElementById('inkdrops-popup').classList.add('show');
+                            if (window.loadInkDrops) window.loadInkDrops();
+                        }, 500);
                     }
                 } else {
                     alert("Virhe: " + data.error);
@@ -1642,7 +1893,7 @@
             const emailInput = document.getElementById("auth-email").value.trim();
 
             if (!emailInput) {
-                alert("Kirjoita sähköpostiosoitteesi ylempään kenttään ensin ve paina 'Unohditko salasanasi?'.");
+                alert("Kirjoita sähköpostiosoitteesi ylempään kenttään ensin ja paina 'Unohditko salasanasi?'.");
                 return;
             }
 
@@ -1692,6 +1943,91 @@
                 updateHeaderAvatar();
             }
         });
+    </script>
+
+    <!-- INKY DROPS AUTO-LOADER (Vain kirjautuneille käyttäjille) -->
+    <script>
+      (function() {
+        const PRICES = [
+          20, 25, 30, 35, 40, 45, 50, 55, 60, 65,
+          70, 75, 80, 85, 90, 95, 100, 110, 120, 130,
+          140, 150, 160, 170, 180, 190, 200, 220, 250
+        ];
+        const MAX_DESIGNS = 30;
+        let dropsLoaded = false;
+
+        function checkDropImg(url) {
+          return new Promise((resolve) => {
+            const img = new Image();
+            const timer = setTimeout(() => finish(false), 1800);
+            function finish(ok) {
+              clearTimeout(timer);
+              img.onload = null;
+              img.onerror = null;
+              resolve(ok ? url : null);
+            }
+            img.onload = () => finish(true);
+            img.onerror = () => finish(false);
+            img.src = url + "?cb=" + Date.now();
+          });
+        }
+
+        async function findDesignForIndex(index) {
+          const candidates = [];
+          PRICES.forEach(price => {
+            candidates.push({ url: `${index}.design${price}.jpg`, price });
+            candidates.push({ url: `${index}.designjpg${price}`, price });
+          });
+
+          const results = await Promise.all(
+            candidates.map(async (c) => {
+              const found = await checkDropImg(c.url);
+              return found ? c : null;
+            })
+          );
+
+          return results.find(r => r !== null) || null;
+        }
+
+        async function loadInkDrops() {
+          if (!currentUser) return;
+          if (dropsLoaded) return;
+          dropsLoaded = true;
+
+          const grid = document.getElementById("inkdrops-grid");
+          if (!grid) return;
+
+          const foundDrops = [];
+          for (let i = 1; i <= MAX_DESIGNS; i++) {
+            const item = await findDesignForIndex(i);
+            if (!item) break;
+            foundDrops.push({ index: i, ...item });
+          }
+
+          if (foundDrops.length === 0) {
+            grid.innerHTML = `<p style="grid-column: 1 / -1; text-align: center; color: #9ca3af; font-size: 12px; padding: 20px 0;">Uusia malleja tulossa pian.</p>`;
+            return;
+          }
+
+          grid.innerHTML = foundDrops.map(item => `
+            <div class="inkdrop-card">
+                <div class="inkdrop-img-box">
+                    <img src="${item.url}" alt="Tatuointimalli ${item.index}" loading="lazy">
+                </div>
+                <div class="inkdrop-info">
+                    <div class="inkdrop-size">1–6 cm (max 6×6 cm)</div>
+                    <div class="inkdrop-price">${item.price} €</div>
+                    <a href="https://ajanvaraus.inkyvibestattoo.com/" onclick="goToBooking(event)" class="inkdrop-book-btn">Varaa tämä tatuointi</a>
+                </div>
+            </div>
+          `).join("");
+        }
+
+        window.loadInkDrops = loadInkDrops;
+        window.addEventListener("load", () => {
+          if (currentUser) setTimeout(loadInkDrops, 1200);
+        });
+      })();
     </script>
     
     <script>
