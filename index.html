@@ -589,7 +589,7 @@
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         }
 
-        /* INKY DROPS MODAL */
+        /* INK DROPS MODAL */
         #inkdrops-popup .popup-content {
             background: #141416;
             color: #ffffff;
@@ -1191,13 +1191,13 @@
         <span class="announce-text">Walk-In Day - <span id="announce-link" class="highlight-link">Näe flash-kuvat ⟡ </span></span>
     </div>
 
-    <!-- INKY DROPS POPUP -->
+    <!-- INK DROPS POPUP -->
     <div id="inkdrops-popup" class="popup-overlay">
         <div class="popup-content">
             <span class="popup-close" onclick="document.getElementById('inkdrops-popup').classList.remove('show')">&times;</span>
             
             <div class="inkdrops-subtitle">INKY VIBES TATTOO </div>
-            <h3 class="inkdrops-title">Inky Drops</h3>
+            <h3 class="inkdrops-title">Ink Drops</h3>
             <p class="inkdrops-lead">Kuukauden tatuoinnit erikoishintaan.</p>
             <p class="inkdrops-desc">Artistin valitsemia tatuointimalleja erikoishintaan. Uusia malleja joka kuukausi.</p>
             <span class="inkdrops-cta-label">Tutustu malleihin</span>
@@ -1333,11 +1333,11 @@
         </div>
         
         <div class="header-actions">
-            <a href="#" id="open-inkdrops-bar" class="ink-drops-trigger" title="Inky Drops" aria-label="Inky Drops" onclick="handleInkDropsClick(event)">
+            <a href="#" id="open-inkdrops-bar" class="ink-drops-trigger" title="Ink Drops" aria-label="Ink Drops" onclick="handleInkDropsClick(event)">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
                 </svg>
-                <span>Inky Drops</span>
+                <span>Ink Drops</span>
             </a>
 
             <a href="#" id="open-auth-bar" title="Profiili" aria-label="Käyttäjäprofiili" style="display: flex; align-items: center; gap: 4px; text-decoration: none; border: none; outline: none;">
@@ -1486,7 +1486,7 @@
             document.getElementById('walkin-popup').classList.add('show');
         }
 
-        // Inky Drops is visible to logged-in users AND Spinwheel email subscribers
+        // Ink Drops is visible to logged-in users AND Spinwheel email subscribers
         function handleInkDropsClick(e) {
             if (e) e.preventDefault();
             if (hasInkDropsAccess()) {
@@ -1621,7 +1621,7 @@
         function handleInteraction() {
             if (!interactionDetected) {
                 interactionDetected = true;
-                setTimeout(showPopup, 40000);
+                setTimeout(showPopup, 5000);
                 ["scroll", "click", "touchstart", "mousemove"].forEach(evt => {
                     window.removeEventListener(evt, handleInteraction);
                 });
@@ -1961,7 +1961,7 @@
         });
     </script>
 
-    <!-- INKY DROPS AUTO-LOADER (Kirjautuneille käyttäjille & Spinwheel-tilaajille) -->
+    <!-- INK DROPS AUTO-LOADER (Kirjautuneille käyttäjille & Spinwheel-tilaajille) -->
     <script>
       (function() {
         const PRICES = [
