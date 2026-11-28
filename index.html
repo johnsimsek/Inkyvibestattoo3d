@@ -1188,7 +1188,7 @@
 <body>
     <!-- ANNOUNCEMENT BAR -->
     <div id="announcement-bar" onclick="handleWalkInClick()">
-        <span class="announce-text">Walk-In Day - <span id="announce-link" class="highlight-link">Näe flash-kuvat ⟡ </span></span>
+        <span class="announce-text">Walk-In Day - <span id="announce-link" class="highlight-link">Näe flash-kuvat ✨ </span></span>
     </div>
 
     <!-- INKY DROPS POPUP -->
@@ -1471,15 +1471,25 @@
             } catch (e) {}
         }
 
+        // Returns true if user has a registered account OR entered their email in the Spinwheel popup
+        function hasInkDropsAccess() {
+            if (currentUser) return true;
+            try {
+                return localStorage.getItem("inky_spinwheel_unlocked") === "true";
+            } catch (e) {
+                return false;
+            }
+        }
+
         // Walk-In Day flashes are visible to everyone
         function handleWalkInClick() {
             document.getElementById('walkin-popup').classList.add('show');
         }
 
-        // Inky Drops is visible only to logged-in/registered users
+        // Inky Drops is visible to logged-in users AND Spinwheel email subscribers
         function handleInkDropsClick(e) {
             if (e) e.preventDefault();
-            if (currentUser) {
+            if (hasInkDropsAccess()) {
                 document.getElementById('inkdrops-popup').classList.add('show');
                 if (window.loadInkDrops) window.loadInkDrops();
             } else {
@@ -1694,7 +1704,9 @@
             updateHeaderAvatar();
             notifyAnimationIframe();
             profilePopup.classList.remove("show");
-            document.getElementById('inkdrops-popup').classList.remove('show');
+            if (!hasInkDropsAccess()) {
+                document.getElementById('inkdrops-popup').classList.remove('show');
+            }
             alert("Olet kirjautunut ulos.");
         }
 
@@ -1937,6 +1949,10 @@
                 updateHeaderAvatar();
                 notifyAnimationIframe(); 
             }
+            else if (action === "spinwheelSubscribed") {
+                try { localStorage.setItem("inky_spinwheel_unlocked", "true"); } catch (e) {}
+                if (window.loadInkDrops) window.loadInkDrops();
+            }
             else if (action === "logout") {
                 currentUser = null;
                 localStorage.removeItem("inky_user");
@@ -1945,7 +1961,7 @@
         });
     </script>
 
-    <!-- INKY DROPS AUTO-LOADER (Vain kirjautuneille käyttäjille) -->
+    <!-- INKY DROPS AUTO-LOADER (Kirjautuneille käyttäjille & Spinwheel-tilaajille) -->
     <script>
       (function() {
         const PRICES = [
@@ -1990,7 +2006,7 @@
         }
 
         async function loadInkDrops() {
-          if (!currentUser) return;
+          if (!hasInkDropsAccess()) return;
           if (dropsLoaded) return;
           dropsLoaded = true;
 
@@ -2025,7 +2041,7 @@
 
         window.loadInkDrops = loadInkDrops;
         window.addEventListener("load", () => {
-          if (currentUser) setTimeout(loadInkDrops, 1200);
+          if (hasInkDropsAccess()) setTimeout(loadInkDrops, 1200);
         });
       })();
     </script>
